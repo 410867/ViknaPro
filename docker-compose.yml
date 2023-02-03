@@ -2,7 +2,9 @@ version: "3"
 
 services:
     nginx:
-        image: nginx
+        build:
+            context: .
+            dockerfile: docker/nginx/Dockerfile
         ports:
             - "80:80"
         depends_on:
@@ -26,21 +28,30 @@ services:
             - app
 
     postgres:
-        image: postgres:15.0
+        build:
+            context: .
+            dockerfile: docker/postgres/Dockerfile
         ports:
             - "5433:5432"
         environment:
             - POSTGRES_USER=app
             - POSTGRES_DATABASE=app
             - POSTGRES_PASSWORD=pass
-            - PGDATA=/var/lib/postgresql/pgdata
+            - PGDATA=/var/www/html/var/postgres_data
         volumes:
             - ./var/postgres_bkp:/var/bkp
-            - ./var/postgres_data:/var/lib/postgresql/pgdata/
             - ./:/var/www/html
         working_dir: /var/www/html
         networks:
             - app
+
+    node:
+        build:
+            context: .
+            dockerfile: docker/node/Dockerfile
+        volumes:
+            - ./:/var/www/html
+        entrypoint: ["/var/www/html/docker/node/entrypoint.sh"]
 
 networks:
     app:

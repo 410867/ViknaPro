@@ -1,0 +1,53 @@
+{% set title = title ? title|trans : 'Admin' %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="" name="description"/>
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="/admin-template/images/favicon.ico">
+
+    {{ include('admin-template/partials/head-css.html.twig') }}
+
+    {% block stylesheets %}
+        {{ encore_entry_link_tags('admin') }}
+    {% endblock %}
+
+</head>
+
+{{ include('admin-template/partials/body.html.twig') }}
+
+<!-- Begin page -->
+<div id="layout-wrapper">
+
+    {{ include('admin/partials/topbar.html.twig') }}
+    {{ include('admin/partials/sidebar.html.twig') }}
+
+    <!-- ============================================================== -->
+    <!-- Start right Content here -->
+    <!-- ============================================================== -->
+    <div class="main-content">
+        <div class="page-content">
+            <div class="container-fluid">
+                {{ include('admin-template/partials/page-title.html.twig', { 'pagetitle': title, 'title': title }) }}
+
+                {% block body %}
+                {% endblock %}
+            </div>
+        </div>
+        {{ include('admin/partials/footer.html.twig') }}
+    </div>
+</div>
+
+{{ include('admin-template/partials/right-sidebar.html.twig') }}
+{{ include('admin-template/partials/vendor-scripts.html.twig') }}
+<script src="/admin-template/js/app.js"></script>
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('admin') }}
+{% endblock %}
+
+</body>
+</html>

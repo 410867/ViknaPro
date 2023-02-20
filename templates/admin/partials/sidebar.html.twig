@@ -1,0 +1,20 @@
+<div class="vertical-menu">
+    <div data-simplebar class="h-100">
+        <div id="sidebar-menu">
+            <ul class="metismenu list-unstyled" id="side-menu">
+
+                {% for parentMenu in menu() %}
+                    <li class="menu-title" key="t-menu">{{ parentMenu.route|trans }}</li>
+                    {% for menuItem in parentMenu.children %}
+                        <li>
+                            <a href="{{ path(menuItem.route) }}" class="waves-effect">
+                                <i class="bx bx-calendar"></i>
+                                <span key="t-calendar">{{ menuItem.route|trans }}</span>
+                            </a>
+                        </li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>

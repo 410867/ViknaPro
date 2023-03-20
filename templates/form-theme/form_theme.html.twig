@@ -1,0 +1,11 @@
+{% extends 'bootstrap_5_layout.html.twig' %}
+
+{% block image_widget %}
+
+    <div>
+        <img src="{{ data|app_img }}" width="300px" class="img-fluid" style="margin-bottom: 0.5rem">
+    </div>
+    <div>
+        {{ form_widget(form) }}
+    </div>
+{% endblock %}

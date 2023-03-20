@@ -10,6 +10,10 @@ RUN usermod -u 1000 www-data && groupmod -g 1000 www-data && chown -R www-data:w
 
 RUN apt-get install -y libicu-dev && docker-php-ext-install intl
 
+RUN apt-get install -y libpq-dev  \
+    && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
+    && docker-php-ext-install pdo_pgsql pgsql
+
 USER www-data
 
 WORKDIR /var/www/html

@@ -12,12 +12,12 @@
     {{ include('admin-template/partials/head-css.html.twig') }}
 
     {% block stylesheets %}
-        {{ encore_entry_link_tags('admin') }}
+        {{ encore_entry_link_tags('app') }}
     {% endblock %}
 
 </head>
 
-{{ include('admin-template/partials/body.html.twig') }}
+<body data-sidebar="dark">
 
 <!-- Begin page -->
 <div id="layout-wrapper">
@@ -31,6 +31,13 @@
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
+                {% for message in app.flashes('success') %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ message|trans }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+
                 {{ include('admin-template/partials/page-title.html.twig', { 'pagetitle': title, 'title': title }) }}
 
                 {% block body %}
@@ -43,10 +50,9 @@
 
 {{ include('admin-template/partials/right-sidebar.html.twig') }}
 {{ include('admin-template/partials/vendor-scripts.html.twig') }}
-<script src="/admin-template/js/app.js"></script>
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('admin') }}
+    {{ encore_entry_script_tags('app') }}
 {% endblock %}
 
 </body>

@@ -1,0 +1,92 @@
+{% extends 'admin/base.html.twig' %}
+{% set title = 'Категория' %}
+{% block  stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="/admin-template/libs/owl.carousel/assets/owl.carousel.min.css">
+    <link rel="stylesheet" href="/admin-template/libs/owl.carousel/assets/owl.theme.default.min.css">
+{% endblock %}
+{% block body %}
+
+    <div class="row" {{ stimulus_controller('admin/category_item') }}>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+
+                    {% if contextCategories %}
+                        <div class="hori-timeline">
+                            <div class="owl-carousel owl-theme  navs-carousel events" id="timeline-carousel">
+                                {% for category in contextCategories %}
+                                    <div class="item event-list{{ currentCategory is same as(category) ? ' active' : '' }}">
+                                        <div>
+                                            <div class="event-date">
+                                                <h5 class="mb-4">
+                                                    {% if currentCategory is same as(category) %}
+                                                        {{ category.title }}
+                                                    {% else %}
+                                                        <a href="{{ path('admin_catalog_category_item', {'id': category.id}) }}">
+                                                            {{ category.title }}
+                                                        </a>
+                                                    {% endif %}
+                                                </h5>
+                                            </div>
+                                            <div class="event-down-icon">
+                                                <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+
+                                <div class="item event-list">
+                                    <div>
+                                        <div class="event-date">
+                                            <h5 class="mb-4">
+                                                <a href="{{ path('admin_catalog_category_item_new_child', {'id': parent.id}) }}">
+                                                    {{ 'Add new'|trans }}
+                                                </a>
+                                            </h5>
+                                        </div>
+                                        <div class="event-down-icon">
+                                            <i class="bx bx-down-arrow-circle h1 text-primary down-arrow-icon"></i>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div id="basic-example" role="application" class="wizard clearfix">
+                        <div class="content clearfix">
+                            <section id="basic-example-p-0" role="tabpanel" aria-labelledby="basic-example-h-0"
+                                     class="body current" aria-hidden="false">
+                                {{ form(form, {'attr': {'id': 'form-' ~ form.vars.id }}) }}
+                            </section>
+                        </div>
+
+                        <div class="actions clearfix">
+                            {% if currentCategory.id %}
+                                <a class="btn btn-danger w-md"
+                                   href="{{ path('admin_catalog_category_item_delete', {'id': currentCategory.id}) }}"
+                                   role="menuitem">
+                                    {{ 'Delete'|trans }}
+                                </a>
+                            {% endif %}
+                            <button type="submit" form="form-{{ form.vars.id }}" class="btn btn-primary w-md">
+                                {{ 'Save'|trans }}
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!-- end card body -->
+            </div>
+            <!-- end card -->
+        </div>
+        <!-- end col -->
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="/admin-template/libs/owl.carousel/owl.carousel.min.js"></script>
+    {{ parent() }}
+{% endblock %}

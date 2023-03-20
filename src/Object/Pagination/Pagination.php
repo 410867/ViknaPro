@@ -1,6 +1,10 @@
 <?php
 
-namespace App\Object;
+namespace App\Object\Pagination;
+
+use App\Object\LimitOffset;
+use Doctrine\ORM\Tools\Pagination\Paginator;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 final class Pagination
 {
@@ -19,28 +23,23 @@ final class Pagination
         $this->totalItems = $totalItems;
     }
 
-    /**
-     * Builds the array for each page.
-     *
-     * @param string $page
-     * @param string $url
-     * @param string $text
-     * @param string $status
-     *
-     * @return array
-     */
-    protected function pageArray($page, $text, $context = 'page')
+    public static function newFromPaginator(Paginator $paginator, LimitOffset $limitOffset): Pagination
     {
-        return [
-            'page' => $page,
-            'text' => $text,
-            'context' => ($this->page == $page) ? 'current' : $context
-        ];
+        return new self(
+            page: $limitOffset->getPage(),
+            limit: $limitOffset->getLimit(),
+            totalItems: $paginator->count()
+        );
     }
 
     public function getTotalPages(): int
     {
         return $this->limit != 0 ? ceil($this->totalItems / $this->limit) : 0;
+    }
+
+    public function hasPages(): bool
+    {
+        return $this->getTotalPages() > 1;
     }
 
     public function getPrev(): int
@@ -54,142 +53,61 @@ final class Pagination
         return $nextPage <= $this->getTotalPages() ? $nextPage : 0;
     }
 
+    // todo: refactor. https://github.com/benhall14/php-pagination/blob/master/src/PHPPagination/Pagination.php
     /**
-     * @return array
+     * @return array<Page>
      */
-    protected function getPages(): array
+    public function getPages(): array
     {
+        if ($this->page > $this->getTotalPages()){
+            throw new NotFoundHttpException('Page is not valid');
+        }
+
         if ($this->getTotalPages() <= 1) {
             return [];
         }
 
-
         $startOffset = ($this->page - self::PAGES_AROUND_ACTIVE) > 0 ? $this->page - self::PAGES_AROUND_ACTIVE : self::FIRST_PAGE;
-        $endOffset = ($this->page + self::PAGES_AROUND_ACTIVE) < $this->total_pages ? $this->page + self::PAGES_AROUND_ACTIVE : $this->last_page;
-
+        $endOffset = ($this->page + self::PAGES_AROUND_ACTIVE) < $this->getTotalPages() ? $this->page + self::PAGES_AROUND_ACTIVE : $this->getTotalPages();
 
         if (((self::PAGES_BEFORE_SEPARATOR * 2) + self::PAGES_BEFORE_SEPARATOR) >= $this->getTotalPages()) {
             $hideSeparator = true;
+        } else {
+            $hideSeparator = false;
         }
 
-        if (!$this->hide_previous) {
-            if ($this->prev_page) {
-                $this->pages[] = $this->pageArray($this->prev_page, $this->previous_text, 'prev');
-            }
-        }
-        if ($this->start_offset >= $this->pagesBeforeSeparator) {
-            for ($i = 1; $i <= $this->pagesBeforeSeparator; $i++) {
-                $this->pages[] = $this->pageArray($i, $this->pageText($i));
+        $pages = [];
+        $result = [];
+        if ($startOffset >= self::PAGES_BEFORE_SEPARATOR) {
+            for ($i = 1; $i <= self::PAGES_BEFORE_SEPARATOR; $i++) {
+                $result[] = Page::newPage($i, $i === $this->page);
                 $pages[] = $i;
             }
-
-            if (!$this->hide_separator) {
-                $this->pages[] = $this->pageArray(null, $this->separator, 'separator');
+            if (!$hideSeparator) {
+                $result[] = Page::newSeparator();
             }
         }
 
-        for ($i = $this->start_offset; $i <= $this->end_offset; $i++) {
+        for ($i = $startOffset; $i <= $endOffset; $i++) {
             if (!in_array($i, $pages)) {
-                $this->pages[] = $this->pageArray($i, $this->pageText($i));
+                $result[] = Page::newPage($i, $i === $this->page);
             }
         }
 
-        if ($this->end_offset <= ($this->last_page - $this->pagesBeforeSeparator)) {
-            if (!$this->hide_separator) {
-                $this->pages[] = $this->pageArray(null, $this->separator, 'separator');
+        if ($endOffset <= ($this->getTotalPages() - self::PAGES_BEFORE_SEPARATOR)) {
+            if (!$hideSeparator) {
+                $result[] = Page::newSeparator();
             }
 
-            for ($i = ($this->last_page - ($this->pagesBeforeSeparator - 1)); $i <= $this->last_page; $i++) {
-                $this->pages[] = $this->pageArray($i, $this->pageText($i));
-            }
-        }
-
-        if ($i == $this->last_page) {
-            $this->pages[] = $this->pageArray($i, $this->pageText($i));
-        }
-
-        if (!$this->hide_next) {
-            if ($this->next_page) {
-                $this->pages[] = $this->pageArray($this->next_page, $this->next_text, 'next');
+            for ($i = ($this->getTotalPages() - (self::PAGES_BEFORE_SEPARATOR - 1)); $i <= $this->getTotalPages(); $i++) {
+                $result[] = Page::newPage($i, $i === $this->page);
             }
         }
 
-        return $this->pages;
-    }
-
-    /**
-     * Generates and returns the generated pagination structure.
-     *
-     * @return string The pagination structure.
-     */
-    public function get()
-    {
-        if ($this->pages === null) {
-            $this->generate();
+        if ($i == $this->getTotalPages()) {
+            $result[] = Page::newPage($i, $i === $this->page);
         }
 
-        $navigation_id = $this->navigation_id ? ' id="' . $this->navigation_id . '"' : '';
-
-        $output = '<nav' . $navigation_id . ' class="' . $this->size . '" aria-label="Navigation">';
-        $output .= "\r\n";
-        $output .= '<ul class="pagination ' . $this->align . '">';
-        $output .= "\r\n";
-        foreach ($this->pages as $page) {
-            $page_item_class = $page['page'] ? $page['page'] : 'separator';
-            $page_link_class = $page['page'] ? $page['page'] : 'separator';
-            $page_disabled_class = !$page['page'] ? ' disabled' : '';
-
-            switch ($page['context']) {
-                case 'prev':
-                    $output .= '<li class="page-item page-item-' . $page_item_class . ' page-prev' . $page_disabled_class . '">';
-                    $output .= '<a aria-label="' . $page['text'] . '" class="page-link page-link-' . $page_link_class . ' page-link-prev" href="' . $page['url'] . '">';
-                    $output .= '<span aria-hidden="true">' . $page['text'] . '</span>';
-                    if ($this->screen_reader) {
-                        $output .= '<span class="sr-only">' . $page['text'] . '</span>';
-                    }
-                    $output .= '</a>';
-                    $output .= '</li>';
-                    break;
-                case 'next':
-                    $output .= '<li class="page-item page-item-' . $page_item_class . ' page-next' . $page_disabled_class . '">';
-                    $output .= '<a aria-label="' . $page['text'] . '" class="page-link page-link-' . $page_link_class . ' page-link-next" href="' . $page['url'] . '">';
-                    $output .= '<span aria-hidden="true">' . $page['text'] . '</span>';
-                    if ($this->screen_reader) {
-                        $output .= '<span class="sr-only">' . $page['text'] . '</span>';
-                    }
-                    $output .= '</a>';
-                    $output .= '</li>';
-                    break;
-                case 'separator':
-                    $output .= '<li class="page-item page-item-' . $page_item_class . ' disabled">';
-                    $output .= '<span class="page-link">' . $page['text'] . '</span>';
-                    if ($this->screen_reader) {
-                        $output .= '<span class="sr-only">(separator)</span>';
-                    }
-                    $output .= '</li>';
-                    break;
-                case 'current':
-                    $output .= '<li class="page-item page-item-' . $page_item_class . ' active">';
-                    $output .= '<span class="page-link">' . $page['text'] . '</span>';
-                    $output .= '</li>';
-                    break;
-                case 'page':
-                    $output .= '<li class="page-item page-item-' . $page_item_class . '">';
-                    $output .= '<a class="page-link page-link-' . $page_link_class . '" href="' . $page['url'] . '">' . $page['text'] . '</a>';
-                    $output .= '</li>';
-                    break;
-            }
-
-            $output .= "\r\n";
-        }
-
-        $output .= '</ul>';
-        $output .= "\r\n";
-        $output .= '</nav>';
-        $output .= "\r\n";
-
-        $this->pagination = $output;
-
-        return $this->pagination;
+        return $result;
     }
 }

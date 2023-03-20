@@ -9,6 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 use Twig\Loader\LoaderInterface;
 
+#[MenuItem('debug')]
 final class AdminTemplateController extends AbstractController
 {
     public const ADMIN_TEMPLATE_URL = 'admin_template';
@@ -19,7 +20,7 @@ final class AdminTemplateController extends AbstractController
         $this->twigLoader = $twig->getLoader();
     }
 
-    #[MenuItem(parentRoute: 'admin_topbar')]
+    #[MenuItem()]
     #[Route('/template/{path}', name: self::ADMIN_TEMPLATE_URL)]
     public function root(string $path = 'index'): Response
     {

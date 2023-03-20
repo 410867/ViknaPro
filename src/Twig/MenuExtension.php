@@ -10,7 +10,7 @@ use Symfony\Component\Routing\RouterInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
-class MenuExtension extends AbstractExtension
+final class MenuExtension extends AbstractExtension
 {
     private RouterInterface $router;
     private string $projectDir;

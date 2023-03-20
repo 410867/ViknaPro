@@ -1,10 +1,153 @@
 {% extends 'admin/base.html.twig' %}
+{% set title = 'Категория' %}
+
+{% block  stylesheets %}
+    {{ parent() }}
+{% endblock %}
 
 {% block body %}
+    <div class="row" {{ stimulus_controller('admin/category_index') }}>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                        <div class="row">
+                            <div class="col-sm-12 col-md-6">
+                                <form>
+                                    <div id="datatable-buttons_filter">
+                                        <div class="input-group table-input-group-filter">
+                                            <input aria-describedby="search-filter" name="search" type="search"
+                                                   value="{{ filter.search }}"
+                                                   class="form-control form-control-sm">
+                                            <button class="btn btn-primary" type="submit" id="search-filter">
+                                                {{ 'search'|trans }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="col-sm-12 col-md-6">
+                                <div class="dataTables_filter dt-buttons  flex-wrap">
+                                    <a href="{{ path('admin_catalog_category_item_new') }}"
+                                       class="btn btn-secondary buttons-copy buttons-html5" tabindex="0"
+                                       aria-controls="datatable-buttons" type="button">
+                                        <span>{{ 'create new'|trans }}</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table id="datatable-buttons"
+                                       class="table table-bordered dt-responsive nowrap w-100 dataTable no-footer dtr-inline"
+                                       aria-describedby="datatable-buttons_info" style="width: 1497px;">
+                                    <thead>
+                                    <tr>
+                                        <th class="sorting">
+                                            {{ 'ID'|trans }}
+                                        </th>
+                                        <th class="sorting">
+                                            {{ 'Title'|trans }}
+                                        </th>
+                                        <th class="sorting">
+                                            {{ 'Img'|trans }}
+                                        </th>
+                                        <th class="sorting">
+                                            {{ 'Children'|trans }}
+                                        </th>
+                                        <th class="sorting">//</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
 
+                                    {% for category in categories %}
+                                        <tr class="odd">
+                                            <td>{{ category.id }}</td>
+                                            <td>{{ category.title }}</td>
+                                            <td>
+                                                <img src="{{ category.img|app_img }}" class="img-thumbnail"
+                                                     width="200px">
+                                            </td>
+                                            <td>
+                                                {% for child in category.children %}
+                                                    <div>
+                                                        <a href="{{ path('admin_catalog_category_item', {'id': child.id}) }}">
+                                                            {{ child.title }}
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-primary"
+                                                   href="{{ path('admin_catalog_category_item', {'id': category.id}) }}">
+                                                    {{ 'edit'|trans }}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-sm-12 col-md-7">
+                                {% if pagination.hasPages %}
+                                    <div class="dataTables_paginate paging_simple_numbers"
+                                         id="datatable-buttons_paginate">
+                                        <ul class="pagination">
+
+                                            {% if pagination.prev %}
+                                                <li class="paginate_button page-item previous"
+                                                    id="datatable-buttons_previous">
+                                                    <a href="{{ pagination.prev|app_page_url }}" aria-controls="datatable-buttons" data-dt-idx="0"
+                                                       tabindex="0" class="page-link">
+                                                        Previous
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+
+                                            {% for page in pagination.pages %}
+                                                <li class="paginate_button page-item{{ page.current ? ' active' : '' }}">
+                                                    {% if page.isSeparator %}
+                                                        <a href="#"
+                                                           aria-controls="datatable-buttons"
+                                                           data-dt-idx="1" tabindex="0"
+                                                           class="page-link">
+                                                            ...
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="{{ page|app_page_url }}"
+                                                           aria-controls="datatable-buttons"
+                                                           data-dt-idx="1" tabindex="0"
+                                                           class="page-link">
+                                                            {{ page.page }}
+                                                        </a>
+                                                    {% endif %}
+                                                </li>
+                                            {% endfor %}
+
+                                            {% if pagination.next %}
+                                                <li class="paginate_button page-item next" id="datatable-buttons_next">
+                                                    <a href="{{ pagination.next|app_page_url }}" aria-controls="datatable-buttons" data-dt-idx="7"
+                                                            tabindex="0" class="page-link">
+                                                        Next
+                                                    </a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- end col -->
+    </div>
 {% endblock %}
 
-{% block stylesheets %}
-
+{% block javascripts %}
+    {{ parent() }}
 {% endblock %}
-

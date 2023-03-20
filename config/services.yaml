@@ -16,3 +16,5 @@ services:
             - '../src/Kernel.php'
             - '../src/Attribute'
             - '../src/Object'
+
+    Symfony\Component\Filesystem\Filesystem: ~

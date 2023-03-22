@@ -14,6 +14,6 @@ RUN apt-get install -y libpq-dev  \
     && docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql \
     && docker-php-ext-install pdo_pgsql pgsql
 
-USER www-data
+#USER www-data
 
 WORKDIR /var/www/html

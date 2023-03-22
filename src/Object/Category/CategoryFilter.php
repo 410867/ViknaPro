@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Object\CategoryFilter;
+namespace App\Object\Category;
 
 use App\Object\FromRequestObjectInterface;
 use App\Object\LimitOffset;
@@ -15,6 +15,7 @@ final class CategoryFilter implements FromRequestObjectInterface
     private bool $root = false;
     private bool $children = false;
     private array $excludeIds = [];
+    private bool $sortByNesting = false;
 
     public static function new(): CategoryFilter
     {
@@ -36,9 +37,9 @@ final class CategoryFilter implements FromRequestObjectInterface
         return self::new()->children();
     }
 
-    public static function findParentsWithoutCurrent(?int $currentId): CategoryFilter
+    public static function newFormChoices(?int $currentId): CategoryFilter
     {
-        $res = self::new()->root();
+        $res = self::new()->sortByNesting();
         if ($currentId){
             $res->addExcludeId($currentId);
         }
@@ -91,6 +92,18 @@ final class CategoryFilter implements FromRequestObjectInterface
     public function addExcludeId(int $id): self
     {
         $this->excludeIds[] = $id;
+        return $this;
+    }
+
+    public function isSortByNesting(): bool
+    {
+        return $this->sortByNesting;
+    }
+
+    public function sortByNesting(): self
+    {
+        $this->sortByNesting = true;
+
         return $this;
     }
 }

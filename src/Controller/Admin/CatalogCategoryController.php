@@ -4,9 +4,8 @@ namespace App\Controller\Admin;
 
 use App\Attribute\MenuItem;
 use App\Entity\Category;
-use App\Form\Category\CategoryType;
-use App\Form\Category\ParentCategoryType;
-use App\Object\CategoryFilter\CategoryFilter;
+use App\Form\Catalog\CategoryType;
+use App\Object\Category\CategoryFilter;
 use App\Object\Pagination\Pagination;
 use App\Repository\CategoryRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -16,7 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[MenuItem('admin_catalog')]
-final class CatalogController extends AbstractController
+final class CatalogCategoryController extends AbstractController
 {
     private CategoryRepository $categoryRepository;
 
@@ -26,14 +25,14 @@ final class CatalogController extends AbstractController
     }
 
     #[MenuItem()]
-    #[Route('/catalog/category/{page<\d+>?1}', name: 'admin_catalog_category')]
+    #[Route('/catalog/category', name: 'admin_catalog_category')]
     public function index(CategoryFilter $filter): Response
     {
         $categories = $this->categoryRepository->findList($filter);
         $pagination = Pagination::newFromPaginator($categories, $filter->getLimitOffset());
 
         return $this->render('admin/catalog/category_index.html.twig', [
-            'categories' => $categories,
+            'rows' => $categories,
             'pagination' => $pagination,
             'filter' => $filter,
         ]);
@@ -51,34 +50,22 @@ final class CatalogController extends AbstractController
         return $this->createItemResponse($category, $request);
     }
 
-    #[Route('/catalog/category/item/{id}/new-child', name: 'admin_catalog_category_item_new_child')]
-    public function itemNewChild(Category $parent, Request $request): Response
-    {
-        return $this->createItemResponse(
-            (new Category())->setParent($parent),
-            $request
-        );
-    }
-
     #[Route('/catalog/category/item/{id}/delete', name: 'admin_catalog_category_item_delete')]
     public function itemDelete(Category $category, Request $request): Response
     {
         $this->categoryRepository->remove($category, true);
-
         return $this->redirectToRoute('admin_catalog_category');
     }
 
     private function createItemResponse(Category $category, Request $request): Response|RedirectResponse
     {
-        if (null === $category->getParent()){
-            $formType = ParentCategoryType::class;
-            $parent = $category;
-        } else {
-            $formType = CategoryType::class;
-            $parent = $category->getParent();
+        if ($request->query->has('parent')){
+            $category->setParent(
+                $this->categoryRepository->find($request->query->getInt('parent'))
+            );
         }
 
-        $form = $this->createForm($formType, $category);
+        $form = $this->createForm($category->getTemplate()->getFormType(), $category);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -91,9 +78,7 @@ final class CatalogController extends AbstractController
 
         return $this->render('admin/catalog/category_item.html.twig', [
             'form' => $form,
-            'contextCategories' => $category->getId() ? [$parent, ...$parent->getChildren()->toArray()] : [],
-            'currentCategory' => $category,
-            'parent' => $parent
+            'item' => $category
         ]);
     }
 }

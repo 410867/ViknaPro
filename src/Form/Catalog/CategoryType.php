@@ -1,26 +1,18 @@
 <?php
 
-namespace App\Form\Category;
+namespace App\Form\Catalog;
 
 use App\Entity\Category;
 use App\Form\ImageType;
-use App\Object\CategoryFilter\CategoryFilter;
-use App\Repository\CategoryRepository;
+use App\Object\Category\CategoryTemplateEnum;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EnumType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-final class CategoryType extends AbstractType
+class CategoryType extends AbstractType
 {
-    private CategoryRepository $repository;
-
-    public function __construct(CategoryRepository $repository)
-    {
-        $this->repository = $repository;
-    }
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         if (($category = $builder->getData()) instanceof Category) {
@@ -30,10 +22,10 @@ final class CategoryType extends AbstractType
         }
 
         $builder
-            ->add('parent', ChoiceType::class, [
-                'choice_label' => Category::TITLE_FIELD_NAME,
-                'choices' => $this->repository->findList(CategoryFilter::findParentsWithoutCurrent($categoryId)),
+            ->add('template', EnumType::class, ['class' => CategoryTemplateEnum::class])
+            ->add('parent', CategoryChoiceType::class, [
                 'required' => false,
+                'current_category_id' => $categoryId
             ])
             ->add('title')
             ->add('description', TextareaType::class, [

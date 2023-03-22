@@ -1,4 +1,6 @@
-{% set title = title ? title|trans : 'Admin' %}
+{% if title is not defined or title is null %}
+    {% set title = app.current_route|trans %}
+{% endif %}
 <!doctype html>
 <html lang="en">
 <head>

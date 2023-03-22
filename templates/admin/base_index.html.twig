@@ -1,0 +1,77 @@
+{% extends 'admin/base.html.twig' %}
+{% block body %}
+
+    <div class="row" {{ stimulus_controller('admin/' ~ app.current_route) }}>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row mb-2">
+                        <div class="col-sm-4">
+                            <form action="{{ path(app.current_route) }}">
+                                <div id="datatable-buttons_filter">
+                                    <div class="input-group table-input-group-filter">
+                                        <input aria-describedby="search-filter" name="search" type="search"
+                                               value="{{ filter.search }}"
+                                               class="form-control form-control-sm">
+                                        <button class="btn btn-primary" type="submit" id="search-filter">
+                                            {{ 'search'|trans }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-8">
+                            <div class="text-sm-end">
+                                {% block rows_buttons %}
+                                <a type="button"
+                                   href="{{ path(app.current_route ~ '_item_new') }}"
+                                   class="btn btn-success btn-rounded waves-effect waves-light mb-2 me-2">
+                                    <i class="mdi mdi-plus me-1"></i>
+                                    {{ 'Add new'|trans }}
+                                </a>
+                                {% endblock %}
+                            </div>
+                        </div><!-- end col-->
+                    </div>
+                    <div class="table-responsive">
+                        {% block rows_table %}
+                            <table class="table align-middle table-nowrap table-check">
+                                <thead class="table-light">
+                                <tr>
+                                    <th class="align-middle"> {{ 'Title'|trans }}</th>
+                                    <th class="align-middle">{{ 'Action'|trans }}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="odd">
+                                        <td>Need implement table</td>
+                                        <td>
+
+                                            <a href="{{ path(app.current_route ~ '_item_new') }}"
+                                               type="button" class="btn btn-primary btn-sm btn-rounded">
+                                                {{ 'New'|trans }}
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        {% endblock %}
+                    </div>
+                    {% if pagination.hasPages %}
+                        <ul class="pagination pagination-rounded justify-content-end mb-2">
+                            {% for page in pagination.pages %}
+                                <li class="page-item{{ page.current ? ' active' : '' }}">
+                                    {% if page.isSeparator %}
+                                        <a class="page-link">...</a>
+                                    {% else %}
+                                        <a class="page-link" href="{{ page|app_page_url }}">{{ page.page }}</a>
+                                    {% endif %}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -10,31 +10,26 @@
             <th class="align-middle"> {{ 'ID'|trans }}</th>
             <th class="align-middle"> {{ 'Title'|trans }}</th>
             <th class="align-middle">{{ 'Img'|trans }}</th>
-            <th class="align-middle">{{ 'Children'|trans }}</th>
+            <th class="align-middle">{{ 'Category'|trans }}</th>
             <th class="align-middle">{{ 'Action'|trans }}</th>
         </tr>
         </thead>
         <tbody>
-        {% for category in rows %}
+        {% for collection in rows %}
             <tr class="odd">
-                <td>{{ category.id }}</td>
-                <td>{{ category.title }}</td>
+                <td>{{ collection.id }}</td>
+                <td>{{ collection.title }}</td>
                 <td>
-                    <img src="{{ category.img|app_img }}" class="img-thumbnail"
+                    <img src="{{ collection.img|app_img }}" class="img-thumbnail"
                          width="200px">
                 </td>
+
                 <td>
-                    {% for child in category.children %}
-                        <div>
-                            <a href="{{ path('admin_catalog_category_item', {'id': child.id}) }}">
-                                {{ child.title }}
-                            </a>
-                        </div>
-                    {% endfor %}
+                    <a href="{{ path('admin_catalog_category') }}">{{ collection.category.title }}</a>
                 </td>
                 <td>
 
-                    <a href="{{ path('admin_catalog_category_item', {'id': category.id}) }}"
+                    <a href="{{ path('admin_catalog_collection_item', {'id': collection.id}) }}"
                        type="button" class="btn btn-primary btn-sm btn-rounded">
                         {{ 'Edit'|trans }}
                     </a>

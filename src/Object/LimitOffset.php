@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints\LessThanOrEqual;
 
 final class LimitOffset implements FromRequestObjectInterface
 {
-    public const DEFAULT_LIMIT = 20;
+    public const DEFAULT_LIMIT = 10;
     public const MAX_LIMIT = 100;
     public const PAGE_PARAM = 'page';
 

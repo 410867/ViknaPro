@@ -3,7 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Category;
-use App\Object\CategoryFilter\CategoryFilter;
+use App\Object\Category\CategoryFilter;
 use App\Object\Filter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -49,7 +49,6 @@ class CategoryRepository extends ServiceEntityRepository
     public function findList(CategoryFilter $filter): Paginator
     {
         $qb = $this->createQueryBuilder('c');
-        $qb->orderBy('c.sort');
 
         if ($filter->isRoot()) {
             $qb->andWhere($qb->expr()->isNull('c.parent'));
@@ -78,6 +77,13 @@ class CategoryRepository extends ServiceEntityRepository
                 ))
                 ->setParameter('search', '%' . $filter->getSearch() . '%');
         }
+
+        if ($filter->isSortByNesting()){
+            $qb
+                ->addOrderBy('c.nesting');
+        }
+
+        $qb->addOrderBy('c.sort');
 
         return new Paginator($qb);
     }

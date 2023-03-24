@@ -57,7 +57,7 @@ services:
             dockerfile: docker/node/Dockerfile
         volumes:
             - ./:/var/www/html
-        entrypoint: ["/bin/sh", "/var/www/html/docker/node/entrypoint.sh"]
+#        entrypoint: ["/bin/sh", "/var/www/html/docker/node/entrypoint.sh"]
         env_file:
             - .env
             - .env.local

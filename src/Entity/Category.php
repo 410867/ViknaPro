@@ -56,10 +56,14 @@ class Category
     #[Column(type: 'json', nullable: true)]
     public ?array $videoLinks = null;
 
+    #[OneToMany(mappedBy: 'category', targetEntity: Product::class)]
+    private Collection $products;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->categoryCollection = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +234,36 @@ class Category
     public function setVideoLinks(?array $videoLinks): self
     {
         $this->videoLinks = $videoLinks;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Product>
+     */
+    public function getProducts(): Collection
+    {
+        return $this->products;
+    }
+
+    public function addProduct(Product $product): self
+    {
+        if (!$this->products->contains($product)) {
+            $this->products->add($product);
+            $product->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeProduct(Product $product): self
+    {
+        if ($this->products->removeElement($product)) {
+            // set the owning side to null (unless already changed)
+            if ($product->getCategory() === $this) {
+                $product->setCategory(null);
+            }
+        }
 
         return $this;
     }

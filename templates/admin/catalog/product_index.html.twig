@@ -10,31 +10,39 @@
             <th class="align-middle"> {{ 'ID'|trans }}</th>
             <th class="align-middle"> {{ 'Title'|trans }}</th>
             <th class="align-middle">{{ 'Img'|trans }}</th>
-            <th class="align-middle">{{ 'Children'|trans }}</th>
+            <th class="align-middle">{{ 'Category'|trans }}</th>
+            <th class="align-middle">{{ 'Collection'|trans }}</th>
             <th class="align-middle">{{ 'Action'|trans }}</th>
         </tr>
         </thead>
         <tbody>
-        {% for category in rows %}
+        {% for item in rows %}
             <tr class="odd">
-                <td>{{ category.id }}</td>
-                <td>{{ category.title }}</td>
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
                 <td>
-                    <img src="{{ category.img|app_img }}" class="img-thumbnail"
+                    <img src="{{ item.img|app_img }}" class="img-thumbnail"
                          width="200px">
                 </td>
+
                 <td>
-                    {% for child in category.children %}
-                        <div>
-                            <a href="{{ path('admin_catalog_category_item', {'id': child.id}) }}">
-                                {{ child.title }} ({{ child.template.value }})
-                            </a>
-                        </div>
-                    {% endfor %}
+                    {% if item.category %}
+                        <a href="{{ path('admin_catalog_category_item', {'id': item.category.id}) }}">{{ item.category.title }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
+                </td>
+
+                <td>
+                    {% if item.collection %}
+                        <a href="{{ path('admin_catalog_collection_item', {'id': item.collection.title}) }}">{{ item.collection.title }}</a>
+                    {% else %}
+                        -
+                    {% endif %}
                 </td>
                 <td>
 
-                    <a href="{{ path('admin_catalog_category_item', {'id': category.id}) }}"
+                    <a href="{{ path('admin_catalog_product_item', {'id': item.id}) }}"
                        type="button" class="btn btn-primary btn-sm btn-rounded">
                         {{ 'Edit'|trans }}
                     </a>

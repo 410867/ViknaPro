@@ -1,0 +1,25 @@
+<div class="row" style="margin-top: 0.5rem; margin-bottom: 0.5rem">
+    <div class="col-sm-6">
+        {% if item.id %}
+            <a class="btn btn-danger w-md"
+               href="{{ path(app.current_route ~ '_delete', {'id': item.id}) }}"
+               role="menuitem">
+                <i class="mdi mdi-truck-fast me-1"></i>
+                {{ 'Delete'|trans }}
+            </a>
+        {% endif %}
+    </div>
+    <div class="col-sm-6">
+        <div class="text-end">
+            <a class="btn btn-danger w-md"
+               href="{{ path( app.current_route|replace({'_item_new': '', '_item': ''})) }}"
+               role="menuitem">
+                <i class="mdi mdi-truck-fast me-1"></i>
+                {{ 'Cencel'|trans }}
+            </a>
+            <button type="submit" form="form-{{ form.vars.id }}" class="btn btn-primary w-md">
+                {{ 'Save'|trans }}
+            </button>
+        </div>
+    </div>
+</div>

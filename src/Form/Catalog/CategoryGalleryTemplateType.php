@@ -2,6 +2,9 @@
 
 namespace App\Form\Catalog;
 
+use App\Form\ImageMultipleType;
+use App\Form\VideoType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 final class CategoryGalleryTemplateType extends CategoryType
@@ -10,7 +13,14 @@ final class CategoryGalleryTemplateType extends CategoryType
     {
         parent::buildForm($builder, $options);
         $builder
-            ->add('images')
-            ->add('videoLinks');
+            ->add('images', ImageMultipleType::class, [
+                'required' => false
+            ])
+            ->add('videoLinks', CollectionType::class, [
+                'required' => false,
+                'allow_delete' => true,
+                'allow_add' => true,
+                'entry_type' => VideoType::class
+            ]);
     }
 }

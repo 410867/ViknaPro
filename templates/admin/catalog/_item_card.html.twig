@@ -1,27 +1,18 @@
-<div class="col-xl-4 col-sm-6">
+<div class="col-3">
     <div class="card">
         <div class="card-body">
-            <div class="row align-items-center">
-                <div class="col-md-4">
-                    <img src="{{ item.img|app_img }}" alt="" class="img-fluid mx-auto d-block">
-                </div>
-                <div class="col-md-8">
-                    <div class="text-center text-md-start pt-3 pt-md-0">
-                        <h5 class="text-truncate">
-                            <a href="{{ path(item_route, {'id': item.id}) }}" class="text-dark">
-                                {{ item.title }}
-                            </a>
-                        </h5>
-                        <p class="text-muted mb-4">
-                            <i class="bx bxs-star text-warning"></i>
-                            <i class="bx bxs-star text-warning"></i>
-                            <i class="bx bxs-star text-warning"></i>
-                            <i class="bx bxs-star text-warning"></i>
-                            <i class="bx bxs-star"></i>
-                        </p>
+            <div class="mt-4 text-center">
+                <h5 class="mb-3 text-truncate">
+                    <a href="{{ path(item_route, {'id': item.id}) }}" class="text-dark">
+                        {{ item.title }}
+                    </a>
+                </h5>
+            </div>
 
-                    </div>
-                </div>
+            <div class="product-img position-relative">
+                <a href="{{ path(item_route, {'id': item.id}) }}">
+                    <img src="{{ item.img|app_img }}" alt="" class="img-fluid mx-auto d-block">
+                </a>
             </div>
         </div>
     </div>

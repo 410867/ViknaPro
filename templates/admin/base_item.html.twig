@@ -1,48 +1,24 @@
 {% extends 'admin/base.html.twig' %}
 
 {% block body %}
-    <div class="row" {{ stimulus_controller('admin/' ~ app.current_route) }}>
+    {% include 'admin/partials/_base_item_buttons.html.twig' %}
+    <div class="row" {{ stimulus_controller(app.current_route|replace({'admin_': 'admin/'})) }}>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <div id="basic-example" role="application" class="wizard clearfix">
                         <div class="content clearfix">
                             <section id="basic-example-p-0" role="tabpanel" aria-labelledby="basic-example-h-0"
-                                     class="body current" aria-hidden="false">
-                                {{ form(form, {'attr': {'id': 'form-' ~ form.vars.id }}) }}
+                                     class="body current row" aria-hidden="false">
+                                {% block item_form %}
+                                    {{ form(form, {'attr': {'id': 'form-' ~ form.vars.id }}) }}
+                                {% endblock %}
                             </section>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-sm-6">
-                                {% if item.id %}
-                                    <a class="btn btn-danger w-md"
-                                       href="{{ path(app.current_route ~ '_delete', {'id': item.id}) }}"
-                                       role="menuitem">
-                                        <i class="mdi mdi-truck-fast me-1"></i>
-                                        {{ 'Delete'|trans }}
-                                    </a>
-                                {% endif %}
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="text-end">
-                                    <a class="btn btn-danger w-md"
-                                       href="{{ path( app.current_route|replace({'_item_new': '', '_item': ''})) }}"
-                                       role="menuitem">
-                                        <i class="mdi mdi-truck-fast me-1"></i>
-                                        {{ 'Cencel'|trans }}
-                                    </a>
-                                    <button type="submit" form="form-{{ form.vars.id }}" class="btn btn-primary w-md">
-                                        {{ 'Save'|trans }}
-                                    </button>
-                                </div>
-                            </div> <!-- end col -->
                         </div>
                     </div>
                 </div>
-                <!-- end card body -->
             </div>
-            <!-- end card -->
         </div>
-        <!-- end col -->
     </div>
+    {% include 'admin/partials/_base_item_buttons.html.twig' %}
 {% endblock %}

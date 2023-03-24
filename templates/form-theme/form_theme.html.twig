@@ -1,11 +1,113 @@
 {% extends 'bootstrap_5_layout.html.twig' %}
 
 {% block image_widget %}
-
-    <div>
-        <img src="{{ data|app_img }}" width="300px" class="img-fluid" style="margin-bottom: 0.5rem">
+    <div class="col-3" style="margin-bottom: 0.5rem">
+        <img src="{{ data|app_img }}" class="img-fluid">
     </div>
     <div>
         {{ form_widget(form) }}
+    </div>
+{% endblock %}
+
+{% block image_multiple_widget %}
+    <div class="row" id="{{ id }}" {{ stimulus_controller('admin/form') }}>
+        {% for f in form.images %}
+            {% set img_id = id ~ '_' ~ loop.index %}
+            <div class="col-3" style="margin-bottom: 0.5rem" id="{{ img_id }}">
+                <img src="{{ f.vars.data|app_img }}" class="img-fluid">
+                {{ form_widget(f) }}
+                <div class="d-grid gap-2" style="margin-top: 0.5rem;">
+                    <button class="btn btn-danger"
+                            type="button"
+                            {{ stimulus_action('admin/form', 'remove', 'click', {'id': img_id}) }}>
+                        {{ 'Delete'|trans }}
+                    </button>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    <div>
+        {{ form_widget(form.uploadedImages) }}
+    </div>
+
+{% endblock %}
+
+{% block image_multiple_row %}
+    <div class="mb-3">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+{% endblock %}
+
+{% block image_multiple_label %}
+    <label for="{{ id }}" class="form-label">{{ label ?? name }}</label>
+{% endblock %}
+
+{% block collection_label %}
+    <label for="{{ id }}" class="form-label">{{ label ?? name }}</label>
+{% endblock %}
+
+{% block collection_row %}
+
+    <div class="mb-3">
+        {{- form_label(form) -}}
+        {{- form_errors(form) -}}
+        {{- form_widget(form) -}}
+    </div>
+
+{% endblock %}
+
+{% block video_widget %}
+    {% if data %}
+        {#        <iframe src="{{ data }}"></iframe> #}
+    {% endif %}
+    {{ form_widget(form) }}
+{% endblock %}
+
+{% block collection_entry_widget %}
+    {% set entry_id = id ~ 'entry' %}
+    <div class="col-6" id="{{ entry_id }}" style="margin-top: 0.5rem">
+        {{ form_widget(form) }}
+        <div class="d-grid gap-2" style="margin-top: 0.5rem;">
+            <button class="btn btn-danger"
+                    type="button"
+                    {{ stimulus_action('admin/form_collection', 'remove', 'click', {'id': entry_id}) }}>
+                {{ 'Delete'|trans }}
+            </button>
+        </div>
+    </div>
+{% endblock %}
+
+{% block collection_widget %}
+    <div
+            {{ stimulus_controller('admin/form_collection') }}
+    >
+        <div id="{{ id }}" class="row" data-index="{{ data|length }}"
+             data-prototype="{{ form_widget(prototype)|e('html_attr') }}">
+            {% for f in form %}
+                {{ form_widget(f) }}
+                {#            {% set entry_id = id ~ '_entry_' ~ loop.index %} #}
+                {#            <div class="col-6" id="{{ entry_id }}"> #}
+                {#                {{ form_widget(f) }} #}
+                {#                <div class="d-grid gap-2" style="margin-top: 0.5rem;"> #}
+                {#                    <button class="btn btn-danger" #}
+                {#                            type="button" #}
+                {#                            {{ stimulus_action('admin/form_collection', 'remove', 'click', {'id': entry_id}) }}> #}
+                {#                        {{ 'Delete'|trans }} #}
+                {#                    </button> #}
+                {#                </div> #}
+                {#            </div> #}
+            {% endfor %}
+        </div>
+        <div class="d-grid gap-2" style="margin-top: 0.5rem;">
+            {% if prototype is defined and prototype %}
+                <button type="button"
+                        class="btn btn-success"
+                        {{ stimulus_action('admin/form-collection', 'addCollectionElement', 'click', {'id': id}) }}>
+                    {{ 'Add'|trans }}
+                </button>
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

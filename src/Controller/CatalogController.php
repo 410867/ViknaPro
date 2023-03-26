@@ -4,19 +4,31 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\CategoryCollection;
+use App\Object\Category\CategoryTemplateEnum;
 use App\Object\ProductFilter;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class CatalogCategoryController extends AppAbstractController
+final class CatalogController extends AppAbstractController
 {
     #[Route('/catalog/category/{slug}', name: 'category', methods: ['GET'])]
-    public function index(Category $category): Response
+    public function index(Category $category, ProductRepository $repository, ProductFilter $filter): Response
     {
-        $template = 'front/catalog/' . strtolower($category->getTemplate()->value) . '.html.twig';
+        $data = [
+            'category' => $category
+        ];
 
-        return $this->render($template, ['category' => $category]);
+        if ($category->getTemplate() === CategoryTemplateEnum::PRODUCTS){
+            $filter->setCategoryId($category->getId());
+            $data['products'] = $repository->findList($filter);
+            $data['filter'] = $filter;
+            $template = 'front/catalog/products.html.twig';
+        } else {
+            $template = 'front/catalog/' . strtolower($category->getTemplate()->value) . '.html.twig';
+        }
+
+        return $this->render($template, $data);
     }
 
     #[Route('/catalog/category/gallery/{context<videos|images>}/{slug}', name: 'category_gallery', methods: ['GET'])]

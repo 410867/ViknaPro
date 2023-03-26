@@ -11,6 +11,7 @@ final class ProductFilter implements FromRequestObjectInterface
     private ?LimitOffset $limitOffset = null;
     private null|string $search = null;
     private null|int $collectionId = null;
+    private null|int $categoryId = null;
 
     public static function new(): ProductFilter
     {
@@ -50,5 +51,15 @@ final class ProductFilter implements FromRequestObjectInterface
     {
         $this->collectionId = $collectionId;
         return $this;
+    }
+
+    public function getCategoryId(): ?int
+    {
+        return $this->categoryId;
+    }
+
+    public function setCategoryId(?int $categoryId): void
+    {
+        $this->categoryId = $categoryId;
     }
 }

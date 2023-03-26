@@ -3,7 +3,6 @@
 namespace App\Repository;
 
 use App\Entity\Product;
-use App\Object\Filter;
 use App\Object\ProductFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -70,6 +69,12 @@ class ProductRepository extends ServiceEntityRepository
             $qb
                 ->andWhere('p.collection = :collection')
                 ->setParameter('collection', $filter->getCollectionId());
+        }
+
+        if ($filter->getCategoryId()){
+            $qb
+                ->andWhere('p.category = :category')
+                ->setParameter('category', $filter->getCategoryId());
         }
 
         $qb->addOrderBy('p.sort');

@@ -1,0 +1,77 @@
+{% extends 'front/base.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/accessories.css">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__accessories">
+                <p>
+                    <a href="/">Главная</a><span>/</span>
+                    {% if category.parent %}
+                        <a href="{{ path('category', {'slug': category.parent.slug}) }}">{{ category.parent.title }}</a>
+                        <span>/</span>
+                    {% endif %}
+                    {{ category.title }}
+                </p>
+                <h2>{{ category.title }}</h2>
+                <p class="text">
+                    {{ category.description }}
+                </p>
+                <div class="block__accessories__list">
+
+                    {% for product in products %}
+                        <div class="block__accessories__item">
+                            <div class="block__accessories__img">
+                                <img src="{{ product.img|app_img }}" alt="">
+                            </div>
+                            <p class="accessories__text">
+                                {{ product.title }}
+                            </p>
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="block__modal__img">
+        <div class="block__modal__header">
+            <div class="block__table">
+                <table class="modal__table">
+                    <tr>
+                        <td class="td__mobile">
+                            <h3>Подробнее</h3>
+                        </td>
+                        <td class="td__desktop">
+                            <h3>Наши работы</h3>
+                        </td>
+                        <td class="modal__button__contact">
+                            <div class="block__button__contact">
+                                <button class="button__contact modal__table__button__contact">Связаться с нами</button>
+                            </div>
+                        </td>
+                        <td class="table__close">
+                            <img class="accessories__modal__button__close" src="/front/images/imgClose.svg" alt="">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="block__img"></div>
+            <div class="block__button__contact mobile">
+                <button class="button__contact button__contact__mobile modal__table__button__contact mobile"><img
+                            src="/front/images/ourWork_img/btn_contacts_img.svg" alt="">Связаться с нами
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="/front/js/accessories.js"></script>
+{% endblock %}

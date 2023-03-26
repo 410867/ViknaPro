@@ -55,10 +55,12 @@ class CategoryCollectionRepository extends ServiceEntityRepository
 
         if ($filter->getSearch()) {
             $qb
-                ->leftJoin('c.category', 'cc')
+                ->leftJoin('c.factory', 'cf')
+                ->leftJoin('cf.category', 'cfc')
                 ->andWhere($qb->expr()->orX(
                     $qb->expr()->like('c.title', ':search'),
-                    $qb->expr()->like('cc.title', ':search'),
+                    $qb->expr()->like('cf.title', ':search'),
+                    $qb->expr()->like('cfc.title', ':search'),
                 ))
                 ->setParameter('search', '%' . $filter->getSearch() . '%');
         }

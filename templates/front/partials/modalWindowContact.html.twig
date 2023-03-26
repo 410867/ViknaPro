@@ -1,0 +1,28 @@
+<div class="modal__window__contact">
+    <div class="popup__body">
+        <div class="popup__content">
+            <img class="button__close" src="/front/images/imgClose.svg" alt="close">
+            <div class="block__form">
+                <h2 class="modal_title">Связаться с нами</h2>
+                <p class="modal_text">Наш менеджер свяжется с вами в ближайшее время</p>
+                <form class="form">
+                    <div class="block__name">
+                        <label for="inputName" class="">Имя</label>
+                        <input type="text" class="input__name" id="inputName" placeholder="Алексей">
+                    </div>
+                    <div class="block__number">
+                        <label for="inputNumber" class="label__text__number">Номер<span class="star__red">*</span></label>
+                        <input required type="tel" class="input__number" id="inputNumber" placeholder="+38 (ХХХ) ХХХ ХХ ХХ">
+                        <label for="inputNumber" class="label__red__text hide">Заполните это поле!</label>
+                    </div>
+                    <div class="block__comment">
+                        <label for="textareaComment" class="">Комментарий</label>
+                        <textarea maxlength="200" class="textarea__comment" id="textareaComment" placeholder="Есть ещё что-то о чём мы должны знать?"></textarea>
+                    </div>
+                    <button class="modal_button">Отправить</button>
+                </form>
+                <button class="modal__button__close hide">Окей</button>
+            </div>
+        </div>
+    </div>
+</div>

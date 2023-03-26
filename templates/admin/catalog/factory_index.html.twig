@@ -1,0 +1,53 @@
+{% extends 'admin/base_index.html.twig' %}
+{% block  stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block rows_table %}
+    <table class="table align-middle table-nowrap table-check">
+        <thead class="table-light">
+        <tr>
+            <th class="align-middle"> {{ 'ID'|trans }}</th>
+            <th class="align-middle"> {{ 'Title'|trans }}</th>
+            <th class="align-middle">{{ 'Img'|trans }}</th>
+            <th class="align-middle">{{ 'Category'|trans }}</th>
+            <th class="align-middle">{{ 'Collections'|trans }}</th>
+            <th class="align-middle">{{ 'Action'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in rows %}
+            <tr class="odd">
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
+                <td>
+                    <img src="{{ item.img|app_img }}" class="img-thumbnail"
+                         width="200px">
+                </td>
+
+                <td>
+                    <a href="{{ path('admin_catalog_category_item', {'id': item.category.id}) }}">{{ item.category.title }}</a>
+                </td>
+                <td>
+                    {% for collection in item.categoryCollection %}
+                    <div>
+                        <a href="{{ path('admin_catalog_collection_item', {'id': collection.id}) }}">{{ collection.title }}</a>
+                        {% endfor %}
+                    </div>
+                </td>
+                <td>
+                    <a href="{{ path('admin_catalog_factory_item', {'id': item.id}) }}"
+                       type="button" class="btn btn-primary btn-sm btn-rounded">
+                        {{ 'Edit'|trans }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

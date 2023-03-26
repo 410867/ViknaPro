@@ -15,7 +15,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-class Category
+class Category implements SluggerEntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -44,8 +44,8 @@ class Category
     #[ORM\Column(length: 255, nullable: true)]
     private null|string $nesting = null;
 
-    #[OneToMany(mappedBy: 'category', targetEntity: CategoryCollection::class)]
-    private Collection $categoryCollection;
+    #[OneToMany(mappedBy: 'category', targetEntity: Factory::class)]
+    private Collection $factories;
 
     #[Column(type: 'string', enumType: CategoryTemplateEnum::class)]
     public CategoryTemplateEnum $template = CategoryTemplateEnum::SUB_CATEGORIES;
@@ -59,10 +59,13 @@ class Category
     #[OneToMany(mappedBy: 'category', targetEntity: Product::class)]
     private Collection $products;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
-        $this->categoryCollection = new ArrayCollection();
+        $this->factories = new ArrayCollection();
         $this->products = new ArrayCollection();
     }
 
@@ -172,36 +175,6 @@ class Category
         return $this;
     }
 
-    /**
-     * @return Collection<int, CategoryCollection>
-     */
-    public function getCategoryCollection(): Collection
-    {
-        return $this->categoryCollection;
-    }
-
-    public function addCategoryCollection(CategoryCollection $categoryCollection): self
-    {
-        if (!$this->categoryCollection->contains($categoryCollection)) {
-            $this->categoryCollection->add($categoryCollection);
-            $categoryCollection->setCategory($this);
-        }
-
-        return $this;
-    }
-
-    public function removeCategoryCollection(CategoryCollection $categoryCollection): self
-    {
-        if ($this->categoryCollection->removeElement($categoryCollection)) {
-            // set the owning side to null (unless already changed)
-            if ($categoryCollection->getCategory() === $this) {
-                $categoryCollection->setCategory(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getTemplate(): CategoryTemplateEnum
     {
         return $this->template;
@@ -243,7 +216,10 @@ class Category
      */
     public function getProducts(): Collection
     {
-        return $this->products;
+        $criteria = new Criteria();
+        $criteria->orderBy(['sort' => 'ASC']);
+
+        return $this->products->matching($criteria);
     }
 
     public function addProduct(Product $product): self
@@ -262,6 +238,51 @@ class Category
             // set the owning side to null (unless already changed)
             if ($product->getCategory() === $this) {
                 $product->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Factory>
+     */
+    public function getFactories(): Collection
+    {
+        $criteria = new Criteria();
+        $criteria->orderBy(['sort' => 'ASC']);
+
+        return $this->factories->matching($criteria);
+    }
+
+    public function addFactory(Factory $factory): self
+    {
+        if (!$this->factories->contains($factory)) {
+            $this->factories->add($factory);
+            $factory->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFactory(Factory $factory): self
+    {
+        if ($this->factories->removeElement($factory)) {
+            // set the owning side to null (unless already changed)
+            if ($factory->getCategory() === $this) {
+                $factory->setCategory(null);
             }
         }
 

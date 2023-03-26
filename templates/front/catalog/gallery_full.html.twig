@@ -1,0 +1,105 @@
+{% extends 'front/base.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/ourWorkCollection.css">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__ourWorkCollection">
+                <p>
+                    <a href="/">Главная</a>
+                    <span>/</span>
+                    <a href="{{ path('our_works') }}">Наши работы</a>
+                    <span>/</span>
+                    {{ category.title }}
+                </p>
+                <div class="block__main__header">
+                    <h2>Название коллекции</h2>
+                    <div class="block__img__video__button">
+                        <button class="button__img{{ context == 'images' ? ' enabled' : '' }}">Фото</button>
+                        <button class="button__video{{ context == 'videos' ? ' enabled' : '' }}">Видео</button>
+                    </div>
+                </div>
+
+                <div class="block__ourWorkCollection__image__list{{ context == 'images' ? '' : ' hide' }}">
+                    {% for img in category.images %}
+                        <img class="ourWorkCollection__item__img" src="{{ img|app_img }}" loading="lazy" alt="">
+                    {% endfor %}
+                </div>
+
+                <div class="block__ourWorkCollection__video__list{{ context == 'videos' ? '' : ' hide' }}">
+                    {% for videoLink in category.videoLinks %}
+                        <div class="ourWorkCollection__item__video">
+                            <div data-video-id="{{ videoLink|app_youtube_video_id }}">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="block__modal__slider__img">
+        <div class="block__modal__header">
+            <div class="block__table">
+                <table class="modal__table">
+                    <tr>
+                        <td class="td__mobile">
+                            <h3>Наши работы</h3>
+                            <p>1 / 30</p>
+                        </td>
+                        <td class="td__desktop">
+                            <h3>Наши работы</h3>
+                        </td>
+                        <td class="counter__images td__desktop">
+                            <p>1 / 30</p>
+                        </td>
+                        <td class="modal__button__contact td__desktop">
+                            <div class="block__button__contact">
+                                <button class="button__contact modal__table__button__contact">Связаться с нами</button>
+                            </div>
+                        </td>
+
+                        <td class="table__close">
+                            <img class="modal__slider__button__close" src="/front/images/imgClose.svg" alt="">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="block__big__img__slider">
+                <div class="ourWorkCollection__slider__bigImages">
+                    {% for img in category.images %}
+                        <div class="ourWorkCollection__sliderBig__item">
+                            <img src="{{ img|app_img }}" alt="slide">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="block__img__slider">
+                <div class="block__button__contact mobile">
+                    <button class="button__contact modal__table__button__contact mobile"><img
+                                src="/front/images/ourWork_img/btn_contacts_img.svg" alt="">Связаться с нами
+                    </button>
+                </div>
+                <hr class="line">
+                <div class="ourWorkCollection__slider__images">
+                    {% for img in category.images %}
+                        <div class="ourWorkCollection__slider__item">
+                            <img src="{{ img|app_img }}" alt="slide">
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="{{ asset_version('/front/js/ourWorkCollection.js') }}"></script>
+    <script src="{{ asset_version('/front/js/youtubeVideo.js?v=1') }}"></script>
+{% endblock %}

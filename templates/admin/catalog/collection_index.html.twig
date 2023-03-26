@@ -10,7 +10,7 @@
             <th class="align-middle"> {{ 'ID'|trans }}</th>
             <th class="align-middle"> {{ 'Title'|trans }}</th>
             <th class="align-middle">{{ 'Img'|trans }}</th>
-            <th class="align-middle">{{ 'Category'|trans }}</th>
+            <th class="align-middle">{{ 'Factory'|trans }}</th>
             <th class="align-middle">{{ 'Action'|trans }}</th>
         </tr>
         </thead>
@@ -25,7 +25,9 @@
                 </td>
 
                 <td>
-                    <a href="{{ path('admin_catalog_category') }}">{{ collection.category.title }}</a>
+                    <a href="{{ path('admin_catalog_factory_item', {'id': collection.factory.id}) }}">
+                        {{ collection.factory.title }} ({{ collection.factory.category.title }})
+                    </a>
                 </td>
                 <td>
 

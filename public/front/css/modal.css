@@ -1,0 +1,384 @@
+@import url('https://fonts.cdnfonts.com/css/gilroy-bold');
+
+* {
+    outline: none;
+}
+
+body.lock {
+    overflow: hidden;
+}
+
+.modal__window__contact,
+.modal__window__review {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(20, 20, 20, 0.9);
+    backdrop-filter: blur(8px);
+    top: 0;
+    left: 0;
+    z-index: 300;
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.modal__window__contact.open,
+.modal__window__review.open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.popup__body {
+    min-height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup__content {
+    display: flex;
+    flex-direction: column;
+    width: 740px;
+    background: #FFFFFF;
+    border-radius: 16px;
+    color: #000;
+}
+
+.block__form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 20px;
+
+    color: #04000C;
+}
+
+.modal_title {
+    margin: 40px 0 12px;
+
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 40px;
+    color: #141414;
+    display: flex;
+    align-items: center;
+}
+
+.modal_text {
+    margin: 0 0 20px;
+
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+    letter-spacing: 0.02em;
+    color: #141414;
+}
+
+.modal__window__contact .popup__body .popup__content .block__form .form,
+.modal__window__review .popup__body .popup__content .block__form .form__review {
+    width: 420px;
+    margin: 0 0 40px 0;
+    padding: 0;
+}
+
+.modal__window__contact .popup__body .popup__content .block__form .form label,
+.modal__window__review .popup__body .popup__content .block__form .form__review label {
+    margin-bottom: 8px;
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    color: #A9A9A9;
+}
+
+.block__name,
+.block__number,
+.block__comment {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.input__name,
+.input__number,
+.textarea__comment {
+    display: flex;
+    width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    border: 1px solid #D2D2D2;
+    border-radius: 4px;
+
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: #000000;
+}
+
+.popup__content .block__form .form .block__number .filling__input,
+.popup__content .block__form .form .block__name .filling__input,
+.popup__content .block__form .form .block__comment .filling__input,
+.popup__content .block__form .form__review .block__number .filling__input,
+.popup__content .block__form .form__review .block__name .filling__input,
+.popup__content .block__form .form__review .block__comment .filling__input {
+    border: 1px solid #000000;
+}
+
+.popup__content .block__form .form .block__number .input__empty__field {
+    border: 1px solid #E30613;
+}
+
+.modal__window__contact .popup__body .popup__content .block__form .form .block__number .label__red__text {
+    margin: 8px 0 0 0;
+    width: 100%;
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 16px;
+    text-align: center;
+    color: #E30613;
+}
+
+.textarea__comment {
+    height: 160px;
+    resize: none;
+}
+
+.star__red {
+    font-size: 18px;
+    color: red;
+}
+
+.modal_button, .modal__button__close, .modal_button__post__review, .modal__review__button__close {
+    margin-top: 4px;
+    margin-bottom: 0;
+    width: 420px;
+
+    text-decoration: none;
+    direction: ltr;
+    display: flex;
+    justify-content: center;
+    padding: 16px 40px;
+
+    background: linear-gradient(0deg, #D92C2A, #D92C2A), #B70000;
+    border: 0 solid #D92C2A;
+    border-radius: 4px;
+
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: #FFFFFF;
+    flex: none;
+    order: 0;
+    flex-grow: 0;
+    cursor: pointer;
+}
+
+.modal_button:hover,
+.modal__button__close:hover,
+.modal_button__post__review:hover,
+.modal__review__button__close:hover {
+    background: #A0000F;;
+}
+
+.modal__button__close, .modal__review__button__close {
+    width: 136px;
+    margin-bottom: 40px;
+}
+
+.button__close {
+    position: absolute;
+    right: 28px;
+    top: 28px;
+    cursor: pointer;
+}
+
+@media all and (max-width: 991px) {
+    .block__form {
+        margin-left: 4.267%;
+        margin-right: 4.267%;
+        margin-bottom: 0;
+    }
+
+    .modal_title {
+        margin-bottom: 12px;
+
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .modal_text {
+        margin-bottom: 16px;
+
+        font-size: 14px;
+        line-height: 20px;
+    }
+
+    .modal__window__contact .popup__body .popup__content .block__form .form,
+    .modal__window__review .popup__body .popup__content .block__form .form__review {
+        margin: 0 0 0 0;
+    }
+
+    .modal_button, .modal_button__post__review {
+        width: 100%;
+
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 15px 40px;
+
+        border-radius: 4px;
+
+        font-size: 16px;
+        line-height: 20px;
+
+        text-align: center;
+    }
+
+    .popup__content {
+        position: relative;
+        width: 350px;
+        margin: 45px 20px 0 20px;
+        padding: 32px 0 32px 0;
+    }
+
+    .block__form {
+        align-items: center;
+        line-height: 22px;
+    }
+
+    .modal_title {
+        margin: 0 0 8px 0;
+
+        font-size: 24px;
+        line-height: 28px;
+    }
+
+    .modal_text {
+        width: 310px;
+        margin: 0 0 16px 0;
+
+        font-size: 14px;
+        line-height: 22px;
+        text-align: center;
+    }
+
+    .modal__window__contact .popup__body .popup__content .block__form .form,
+    .modal__window__review .popup__body .popup__content .block__form .form__review {
+        width: 310px;
+    }
+
+    .modal__window__contact .popup__body .popup__content .block__form .form label,
+    .modal__window__review .popup__body .popup__content .block__form .form__review label {
+        font-size: 12px;
+        line-height: 14px;
+    }
+
+    .input__name,
+    .input__number,
+    .textarea__comment {
+        padding: 13px 16px;
+
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .star__red {
+        font-size: 16px;
+    }
+
+    .modal_button, .modal__button__close, .modal_button__post__review, .modal__review__button__close {
+        margin: 0;
+        width: 310px;
+        padding: 13px 40px;
+
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .modal__button__close, .modal__review__button__close {
+        width: 115px;
+    }
+
+    .button__close {
+        right: 0;
+        top: -45px;
+    }
+}
+
+@media all and (max-width: 370px) {
+    .modal_title {
+        margin-bottom: 12px;
+        font-size: 16px;
+        line-height: 20px;
+    }
+
+    .modal_text {
+        margin-bottom: 16px;
+
+        font-size: 12px;
+        line-height: 16px;
+    }
+
+    .modal_button, .modal_button__post__review {
+        width: 100%;
+
+        padding: 15px 20px;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .popup__content {
+        position: relative;
+        width: 290px;
+        padding: 16px 0 16px 0;
+    }
+
+    .modal_title {
+        font-size: 20px;
+        line-height: 24px;
+    }
+
+    .modal_text {
+        width: 250px;
+        margin: 0 0 12px 0;
+        font-size: 12px;
+        line-height: 20px;
+    }
+
+    .modal__window__contact .popup__body .popup__content .block__form .form,
+    .modal__window__review .popup__body .popup__content .block__form .form__review {
+        width: 250px;
+    }
+
+    .modal_button, .modal__button__close, .modal_button__post__review, .modal__review__button__close {
+        width: 250px;
+        padding: 13px 40px;
+    }
+
+    .modal__button__close, .modal__review__button__close {
+        width: 100px;
+    }
+}
+
+
+.hide {
+    display: none;
+}

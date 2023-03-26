@@ -27,7 +27,7 @@ class ProductType extends AbstractType
                 'required' => false,
                 'class' => CategoryCollection::class,
                 'choice_label' => 'title',
-                'group_by' => fn(?CategoryCollection $collection) => $collection?->getCategory()->getTitle() . ' ('.($collection?->getCategory()?->getParent()?->getTitle()).')'
+                'group_by' => fn(?CategoryCollection $collection) => $collection?->getFactory()->getTitle() . ' ('.($collection?->getFactory()?->getCategory()?->getTitle()).')'
             ])
         ;
     }

@@ -1,0 +1,62 @@
+{% extends 'front/base.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/gallery.css">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__windows">
+                <div class="block__windows__text">
+                    <p><a href="/">Главная</a><span>/</span>{{ category.title }}</p>
+                    <h2>{{ category.title }}</h2>
+                    <img class="window__img" src="{{ category.img|app_img }}" alt="">
+                    <p class="text">
+                        {{ category.description }}
+                    </p>
+                    <button class="button__contact">Связаться с нами</button>
+                </div>
+
+                <div class="block__image">
+                    <div class="block__image__list">
+                        {% for img in category.images|slice(0, 6) %}
+                            <img class="ourWorkCollection__item__img" src="{{ img|app_img }}"
+                                 loading="lazy" alt="">
+                        {% endfor %}
+                    </div>
+                    {% if category.images|length > 6 %}
+                        <div class="block__link">
+                            <a href="{{ path('category_gallery', {'slug': category.slug, 'context': 'images'}) }}">
+                                Смотреть ещё
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="block__video">
+                    <div class="block__ourWorkCollection__video__list">
+                        {% for videoId in category.videoLinks|slice(0, 6) %}
+                            <div class="ourWorkCollection__item__video">
+                                <div data-video-id="{{ videoId|app_youtube_video_id }}">
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                    {% if category.videoLinks|length > 6 %}
+                        <div class="block__link">
+                            <a href="{{ path('category_gallery', {'slug': category.slug, 'context': 'videos'}) }}">
+                                Смотреть ещё
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="{{ asset_version('/front/js/gallery.js?v=12') }}"></script>
+    <script src="{{ asset_version('/front/js/youtubeVideo.js?v=1') }}"></script>
+{% endblock %}

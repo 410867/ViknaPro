@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Москитные сетки</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/Category.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<body>
+
+<div class="block__shadow"></div>
+
+<%- include ("./partials/header.ejs") %>
+
+<main>
+    <div class="main">
+        <hr class="top__main__hr">
+        <div class="block__mosquitoNet">
+            <p><a href="/">Главная</a><span>/</span>Москитные сетки</p>
+            <h2>Москитные сетки</h2>
+            <div class="block__mosquitoNets__list">
+
+                <div class="block__mosquitoNet__item">
+                    <img src="/front/images/category_img/mosquitoNetCategory_img/mosquitoNet_1.svg" alt="">
+                    <div class="block__text">
+                        <h3>Обычные</h3>
+                        <p>Мы используем качественные и проверенные бренды</p>
+                        <a href="/">Смотреть бренды <img src="/front/images/arrow_right_Img.svg" alt=""></a>
+                    </div>
+                </div>
+
+                <div class="block__mosquitoNet__item">
+                    <img src="/front/images/category_img/mosquitoNetCategory_img/mosquitoNet_2.svg" alt="">
+                    <div class="block__text">
+                        <h3>Роллетные сетки</h3>
+                        <p>Мы используем качественные и проверенные бренды</p>
+                        <a href="/">Смотреть бренды <img src="/front/images/arrow_right_Img.svg" alt=""></a>
+                    </div>
+                </div>
+
+                <div class="block__mosquitoNet__item">
+                    <img src="/front/images/category_img/mosquitoNetCategory_img/mosquitoNet_3.svg" alt="">
+                    <div class="block__text">
+                        <h3>Плиссе</h3>
+                        <p>Мы используем качественные и проверенные бренды</p>
+                        <a href="/">Смотреть бренды <img src="/front/images/arrow_right_Img.svg" alt=""></a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include ("./partials/mobileHeaderMenu.ejs") %>
+<%- include ("./partials/modalWindowContact.ejs") %>
+<%- include ("./partials/footerWithoutSlider.ejs") %>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/js/slick.min.js"></script>
+<script type="module" src="/js/header.js"></script>
+
+</body>
+</html>

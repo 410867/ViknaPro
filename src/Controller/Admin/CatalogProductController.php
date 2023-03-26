@@ -3,20 +3,20 @@
 namespace App\Controller\Admin;
 
 use App\Attribute\MenuItem;
+use App\Controller\AppAbstractController;
 use App\Entity\Product;
 use App\Form\Catalog\ProductType;
-use App\Object\Filter;
 use App\Object\Pagination\Pagination;
+use App\Object\ProductFilter;
 use App\Repository\CategoryCollectionRepository;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class CatalogProductController extends AbstractController
+final class CatalogProductController extends AppAbstractController
 {
     private CategoryCollectionRepository $collectionRepository;
     private CategoryRepository $categoryRepository;
@@ -34,8 +34,8 @@ final class CatalogProductController extends AbstractController
     }
 
     #[MenuItem(parentRoute: 'admin_catalog')]
-    #[Route('/catalog/product', name: 'admin_catalog_product')]
-    public function index(Filter $filter): Response
+    #[Route(self::ADMIN_PATH.'/catalog/product', name: 'admin_catalog_product')]
+    public function index(ProductFilter $filter): Response
     {
         $rows = $this->productRepository->findList($filter);
         $pagination = Pagination::newFromPaginator($rows, $filter->getLimitOffset());
@@ -47,19 +47,19 @@ final class CatalogProductController extends AbstractController
         ]);
     }
 
-    #[Route('/catalog/product/item', name: 'admin_catalog_product_item_new')]
+    #[Route(self::ADMIN_PATH.'/catalog/product/item', name: 'admin_catalog_product_item_new')]
     public function itemNew(Request $request): Response
     {
         return $this->createItemResponse(new Product(), $request);
     }
 
-    #[Route('/catalog/product/item/{id}', name: 'admin_catalog_product_item')]
+    #[Route(self::ADMIN_PATH.'/catalog/product/item/{id}', name: 'admin_catalog_product_item')]
     public function item(Product $product, Request $request): Response
     {
         return $this->createItemResponse($product, $request);
     }
 
-    #[Route('/catalog/product/item/{id}/delete', name: 'admin_catalog_product_item_delete')]
+    #[Route(self::ADMIN_PATH.'/catalog/product/item/{id}/delete', name: 'admin_catalog_product_item_delete')]
     public function itemDelete(Product $product): Response
     {
         $this->productRepository->remove($product, true);

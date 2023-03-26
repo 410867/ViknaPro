@@ -1,0 +1,46 @@
+{% extends 'front/base.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/interiorDoorsCategory.css">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__interiorDoor">
+                <p>
+                    <a href="/">Главная</a><span>/</span>
+                    <a href="{{ path('category', {'slug': category.parent.slug}) }}">{{ category.parent.title }}</a><span>/</span>
+                    {{ category.title }}
+                </p>
+                <h2>{{ category.title }}</h2>
+
+                {% for factory in category.factories %}
+                    <img src="{{ factory.img|app_img }}" alt="">
+                    <div class="block__interiorDoor__list slider_1">
+
+                        {% for collection in factory.categoryCollection %}
+                            <div class="block__interiorDoor__item">
+                                <img src="{{ collection.img|app_img }}" alt="">
+                                <div class="block__text">
+                                    <h3>{{ collection.title }}</h3>
+                                    <p>{{ collection.description }}</p>
+                                    <a href="{{ path('collection_products', {'slug': collection.slug}) }}">
+                                        Смотреть коллекцию
+                                        <img src="/front/images/arrow_right_Img.svg" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="/front/js/interiorDoorsCategory.js"></script>
+{% endblock %}

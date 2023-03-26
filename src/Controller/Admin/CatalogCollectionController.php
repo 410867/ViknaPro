@@ -3,34 +3,34 @@
 namespace App\Controller\Admin;
 
 use App\Attribute\MenuItem;
+use App\Controller\AppAbstractController;
 use App\Entity\CategoryCollection;
 use App\Form\Catalog\CategoryCollectionType;
 use App\Object\Filter;
 use App\Object\Pagination\Pagination;
 use App\Repository\CategoryCollectionRepository;
-use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\FactoryRepository;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-final class CatalogCollectionController extends AbstractController
+final class CatalogCollectionController extends AppAbstractController
 {
     private CategoryCollectionRepository $collectionRepository;
-    private CategoryRepository $categoryRepository;
+    private FactoryRepository $factoryRepository;
 
     public function __construct(
         CategoryCollectionRepository $collectionRepository,
-        CategoryRepository $categoryRepository
+        FactoryRepository $factoryRepository
     )
     {
         $this->collectionRepository = $collectionRepository;
-        $this->categoryRepository = $categoryRepository;
+        $this->factoryRepository = $factoryRepository;
     }
 
     #[MenuItem(parentRoute: 'admin_catalog')]
-    #[Route('/catalog/collection', name: 'admin_catalog_collection')]
+    #[Route(self::ADMIN_PATH.'/catalog/collection', name: 'admin_catalog_collection')]
     public function index(Filter $filter): Response
     {
         $collection = $this->collectionRepository->findList($filter);
@@ -43,19 +43,19 @@ final class CatalogCollectionController extends AbstractController
         ]);
     }
 
-    #[Route('/catalog/collection/item', name: 'admin_catalog_collection_item_new')]
+    #[Route(self::ADMIN_PATH.'/catalog/collection/item', name: 'admin_catalog_collection_item_new')]
     public function itemNew(Request $request): Response
     {
         return $this->createItemResponse(new CategoryCollection(), $request);
     }
 
-    #[Route('/catalog/collection/item/{id}', name: 'admin_catalog_collection_item')]
+    #[Route(self::ADMIN_PATH.'/catalog/collection/item/{id}', name: 'admin_catalog_collection_item')]
     public function item(CategoryCollection $collection, Request $request): Response
     {
         return $this->createItemResponse($collection, $request);
     }
 
-    #[Route('/catalog/collection/item/{id}/delete', name: 'admin_catalog_collection_item_delete')]
+    #[Route(self::ADMIN_PATH.'/catalog/collection/item/{id}/delete', name: 'admin_catalog_collection_item_delete')]
     public function itemDelete(CategoryCollection $collection): Response
     {
         $this->collectionRepository->remove($collection, true);
@@ -64,9 +64,9 @@ final class CatalogCollectionController extends AbstractController
 
     private function createItemResponse(CategoryCollection $collection, Request $request): Response|RedirectResponse
     {
-        if ($request->query->has('category')){
-            $collection->setCategory(
-                $this->categoryRepository->find($request->query->getInt('category'))
+        if ($request->query->has('factory')){
+            $collection->setFactory(
+                $this->factoryRepository->find($request->query->getInt('factory'))
             );
         }
 

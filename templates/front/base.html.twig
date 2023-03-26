@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vikna Pro</title>
+
+    <link rel="stylesheet" href="/front/css/header.css">
+    {% block stylesheet %}
+    {% endblock %}
+    <link rel="stylesheet" href="/front/css/footer.css">
+    <link rel="stylesheet" href="/front/css/modal.css">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<body>
+
+<div class="block__shadow"></div>
+
+{% include ("/front/partials/header.html.twig") %}
+
+{% block body %}
+{% endblock %}
+
+{%- include ("/front/partials/mobileHeaderMenu.html.twig") %}
+{%- include ("/front/partials/modalWindowContact.html.twig") %}
+{%- include ("/front/partials/footerWithSlide.html.twig") %}
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/front/js/slick.min.js"></script>
+<script type="module" src="/front/js/header.js"></script>
+{% block js %}
+{% endblock %}
+
+</body>
+</html>

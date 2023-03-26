@@ -43,8 +43,8 @@ class CategoryRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Filter $filter
-     * @return Paginator|Category[]
+     * @param CategoryFilter $filter
+     * @return Paginator<Category>
      */
     public function findList(CategoryFilter $filter): Paginator
     {

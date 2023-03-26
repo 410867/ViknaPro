@@ -43,10 +43,10 @@ services:
             - POSTGRES_DATABASE=app
             - POSTGRES_PASSWORD=pass
             - PGDATA=/var/lib/postgresql/pgdata
-#        volumes:
-#            - pgsql-bkp:/var/bkp
-#            - pgsql-data:/var/lib/postgresql/pgdata/
-#            - ./:/app
+        volumes:
+            - ./db_data/pgsql-bkp:/var/bkp
+            - ./db_data/pgsql-data:/var/lib/postgresql/pgdata/
+            - ./:/app
         working_dir: /app
         networks:
             - app

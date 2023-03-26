@@ -1,0 +1,133 @@
+{% extends 'front/base.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/collectionPage.css">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__main__header">
+                <div class="block__collection__text">
+                    <p class="text__links">
+                        <a href="/">Главная</a><span>/</span>
+                        {% if collection.factory.category and collection.factory.category.parent %}
+                            <a href="{{ path('category', {'slug': collection.factory.category.parent.slug}) }}">
+                                {{ collection.factory.category.parent.title }}
+                            </a>
+                            <span>/</span>
+                        {% endif %}
+
+                        {% if collection.factory.category %}
+                            <a href="{{ path('category', {'slug': collection.factory.category.slug}) }}">
+                                {{ collection.factory.category.title }}
+                            </a>
+                            <span>/</span>
+                        {% endif %}
+                        {{ collection.factory.title }}.
+                        <span class="modification">{{ collection.title }}</span>
+                    </p>
+                    <h2>
+                        {{ collection.factory.title }}. Коллекция <span
+                                class="modification">{{ collection.title }}</span>
+                    </h2>
+                    <p class="text">
+                        {{ collection.description }}
+                    </p>
+                </div>
+                <div class="block__main__header__form">
+                    <form class="search__form" >
+                        <input type="text" name="search" placeholder="Поиск по названию" value="{{ filter.search }}">
+                        <button class="btn__search"><img src="/front/images/search_img.svg" alt=""></button>
+                    </form>
+                </div>
+            </div>
+            <div class="block__main__body">
+                <div class="block__name__collections">
+                    <h3>Коллекции</h3>
+                    {% for item in collection.factory.categoryCollection %}
+                        {% if item.id == collection.id %}
+                            <a class="name__collection link__active">
+                                {{ item.title }}
+                            </a>
+                        {% else %}
+                            <a class="name__collection"
+                               href="{{ path('collection_products', {'slug': item.slug}) }}">
+                                {{ item.title }}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+                <div class="block__list__collections">
+                    {% for product in products %}
+                        <div class="block__item__collection">
+                            <div class="block__img__collection">
+                                <img src="{{ product.img|app_img }}" alt="">
+                            </div>
+                            <p>{{ product.title }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <div class="block__modal__slider__img">
+        <div class="block__modal__header">
+            <div class="block__table">
+                <table class="modal__table">
+                    <tr>
+                        <td class="td__mobile">
+                            <h3>Sandal CP-71 1</h3>
+                            <p>1 / 30</p>
+                        </td>
+                        <td class="td__desktop">
+                            <h3>Sandal CP-71 1</h3>
+                        </td>
+                        <td class="counter__images td__desktop">
+                            <p>1 / 30</p>
+                        </td>
+                        <td class="modal__button__contact td__desktop">
+                            <div class="block__button__contact">
+                                <button class="button__contact modal__table__button__contact">Связаться с нами</button>
+                            </div>
+                        </td>
+                        <td class="table__close">
+                            <img class="modal__slider__button__close" src="/front/images/imgClose.svg" alt="">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="block__big__img__slider">
+                <div class="collection__slider__bigImages">
+
+                    {% for product in products %}
+                        <div class="collection__sliderBig__item">
+                            <img src="{{ product.img|app_img }}" alt="slide">
+                        </div>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+            <div class="block__img__slider">
+                <div class="block__button__contact mobile">
+                    <button class="button__contact button__contact__mobile modal__table__button__contact mobile"><img
+                                src="/front/images/ourWork_img/btn_contacts_img.svg" alt="">Связаться с нами
+                    </button>
+                </div>
+                <hr class="line">
+                <div class="block__slider__collection">
+                    <div class="collection__slider__images"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="/front/js/collectionPage.js"></script>
+{% endblock %}
+

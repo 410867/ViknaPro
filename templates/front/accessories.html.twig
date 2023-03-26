@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Фурнитура</title>
+
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/accessories.css">
+    <link rel="stylesheet" href="/css/footer.css">
+    <link rel="stylesheet" href="/css/modal.css">
+    <link href="https://fonts.cdnfonts.com/css/gilroy-bold" rel="stylesheet">
+</head>
+<body>
+
+<div class="block__shadow"></div>
+
+<%- include ("./partials/header.ejs") %>
+
+<main>
+    <div class="main">
+        <hr class="top__main__hr">
+        <div class="block__accessories">
+            <p><a href="/">Главная</a><span>/</span><a href="/door">Двери</a><span>/</span>Фурнитура</p>
+            <h2>Фурнитура</h2>
+            <p class="text">Дверь современного и классического дизайна. Покрытие – экошпон RENOLIT на основе полипропилена (Германия). Каркас двери – клееный брус из массива дерева.</p>
+            <div class="block__accessories__list">
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_1.png" alt=""></div>
+                    <p class="accessories__text">Защелка дверная MVM P-100 матовый никель</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_2.png" alt=""></div>
+                    <p class="accessories__text">Дверной замок входной Мотор Сич ЗН1-114-6...</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_3.png" alt=""></div>
+                    <p class="accessories__text">Ручка на розетке Condi Collection Burgas...</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_4.png" alt=""></div>
+                    <p class="accessories__text">Ручка на розетке Flessa SN матовый никель</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_5.png" alt=""></div>
+                    <p class="accessories__text">Петля Elephant накладная 100x75x3 м...</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_6.png" alt=""></div>
+                    <p class="accessories__text">Стопор дверной MVM магнитный M-30 SN...</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_7.png" alt=""></div>
+                    <p class="accessories__text">Уплотнитель самоклеящийся D-...</p>
+                </div>
+                <div class="block__accessories__item">
+                    <div class="block__accessories__img"><img src="/front/images/accessiories_img/accessiores_img_8.png" alt=""></div>
+                    <p class="accessories__text">Набор комплектующих для раздвижных двере...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<div class="block__modal__img">
+    <div class="block__modal__header">
+        <div class="block__table">
+            <table class="modal__table">
+                <tr>
+                    <td class="td__mobile">
+                        <h3>Подробнее</h3>
+                    </td>
+                    <td class="td__desktop">
+                        <h3>Наши работы</h3>
+                    </td>
+                    <td class="modal__button__contact">
+                        <div class="block__button__contact">
+                            <button class="button__contact modal__table__button__contact">Связаться с нами</button>
+                        </div>
+                    </td>
+                    <td class="table__close">
+                        <img class="accessories__modal__button__close" src="/front/images/imgClose.svg" alt="">
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="block__img"></div>
+        <div class="block__button__contact mobile">
+            <button class="button__contact button__contact__mobile modal__table__button__contact mobile"><img src="/front/images/ourWork_img/btn_contacts_img.svg" alt="">Связаться с нами</button>
+        </div>
+    </div>
+</div>
+
+<%- include ("./partials/mobileHeaderMenu.ejs") %>
+<%- include ("./partials/modalWindowContact.ejs") %>
+<%- include ("./partials/footerWithoutSlider.ejs") %>
+
+<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script type="text/javascript" src="/js/slick.min.js"></script>
+<script type="module" src="/js/header.js"></script>
+<script type="module" src="/js/accessories.js"></script>
+
+</body>
+</html>

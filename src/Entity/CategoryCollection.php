@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping\OneToMany;
 
 #[ORM\Entity(repositoryClass: CategoryCollectionRepository::class)]
-class CategoryCollection
+class CategoryCollection implements SluggerEntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -28,15 +28,18 @@ class CategoryCollection
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img;
 
-    #[ManyToOne(targetEntity: Category::class, inversedBy: 'categoryCollection')]
+    #[ManyToOne(targetEntity: Factory::class, inversedBy: 'categoryCollection')]
     #[JoinColumn(onDelete: 'SET NULL')]
-    private null|Category $category = null;
+    private null|Factory $factory = null;
 
     #[ORM\Column]
     private ?int $sort = 0;
 
     #[OneToMany(mappedBy: 'collection', targetEntity: Product::class)]
     private Collection $products;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function __construct()
     {
@@ -84,14 +87,14 @@ class CategoryCollection
         return $this;
     }
 
-    public function getCategory(): ?Category
+    public function getFactory(): ?Factory
     {
-        return $this->category;
+        return $this->factory;
     }
 
-    public function setCategory(?Category $category): self
+    public function setFactory(?Factory $factory): self
     {
-        $this->category = $category;
+        $this->factory = $factory;
 
         return $this;
     }
@@ -134,6 +137,18 @@ class CategoryCollection
                 $product->setCollection(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

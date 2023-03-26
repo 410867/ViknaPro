@@ -3,19 +3,18 @@
 namespace App\Controller\Admin;
 
 use App\Attribute\MenuItem;
+use App\Controller\AppAbstractController;
 use App\Entity\Category;
-use App\Form\Catalog\CategoryType;
 use App\Object\Category\CategoryFilter;
 use App\Object\Pagination\Pagination;
 use App\Repository\CategoryRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 #[MenuItem('admin_catalog')]
-final class CatalogCategoryController extends AbstractController
+final class CatalogCategoryController extends AppAbstractController
 {
     private CategoryRepository $categoryRepository;
 
@@ -25,7 +24,7 @@ final class CatalogCategoryController extends AbstractController
     }
 
     #[MenuItem()]
-    #[Route('/catalog/category', name: 'admin_catalog_category')]
+    #[Route(self::ADMIN_PATH.'/catalog/category', name: 'admin_catalog_category')]
     public function index(CategoryFilter $filter): Response
     {
         $categories = $this->categoryRepository->findList($filter);
@@ -38,19 +37,19 @@ final class CatalogCategoryController extends AbstractController
         ]);
     }
 
-    #[Route('/catalog/category/item', name: 'admin_catalog_category_item_new')]
+    #[Route(self::ADMIN_PATH.'/catalog/category/item', name: 'admin_catalog_category_item_new')]
     public function itemNew(Request $request): Response
     {
         return $this->createItemResponse(new Category(), $request);
     }
 
-    #[Route('/catalog/category/item/{id}', name: 'admin_catalog_category_item')]
+    #[Route(self::ADMIN_PATH.'/catalog/category/item/{id}', name: 'admin_catalog_category_item')]
     public function item(Category $category, Request $request): Response
     {
         return $this->createItemResponse($category, $request);
     }
 
-    #[Route('/catalog/category/item/{id}/delete', name: 'admin_catalog_category_item_delete')]
+    #[Route(self::ADMIN_PATH.'/catalog/category/item/{id}/delete', name: 'admin_catalog_category_item_delete')]
     public function itemDelete(Category $category, Request $request): Response
     {
         $this->categoryRepository->remove($category, true);

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Product;
 use App\Object\Filter;
+use App\Object\ProductFilter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -42,10 +43,10 @@ class ProductRepository extends ServiceEntityRepository
     }
 
     /**
-     * @param Filter $filter
-     * @return Paginator|Product[]
+     * @param ProductFilter $filter
+     * @return Paginator<Product>
      */
-    public function findList(Filter $filter): Paginator
+    public function findList(ProductFilter $filter): Paginator
     {
         $qb = $this->createQueryBuilder('p');
 
@@ -63,6 +64,12 @@ class ProductRepository extends ServiceEntityRepository
                     $qb->expr()->like('pco.title', ':search'),
                 ))
                 ->setParameter('search', '%' . $filter->getSearch() . '%');
+        }
+
+        if ($filter->getCollectionId()){
+            $qb
+                ->andWhere('p.collection = :collection')
+                ->setParameter('collection', $filter->getCollectionId());
         }
 
         $qb->addOrderBy('p.sort');

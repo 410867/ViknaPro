@@ -1,0 +1,82 @@
+<footer class="footer">
+    <div class="block__footer">
+        <div class="footer__block__info">
+            <hr>
+            <div class="block__connection">
+                <div class="block__connection__text">
+                    <h2 class="header__connection">Давайте обсудим сотрудничество в удобном для вас формате</h2>
+                    <p class="text__connection">Готовы ответить на любые вопросы и помочь с замерами</p>
+                </div>
+                <div class="block__contactUs">
+                    <div class="block__contactUs__text">
+                        <p class="text">Оставьте номер для связи или напишите нам в мессенджер</p>
+                        <a href=""><img class="img__viber" src="/front/images/footer_img/Viber_img.svg" alt=""></a>
+                        <a href="https://telegram.me/XXXXXXXXXX"><img src="/front/images/footer_img/Telegram_img.svg" alt=""></a>
+                    </div>
+                    <form class="footer__form">
+                        <input required type="tel" class="footer__input__number" placeholder="+38 (ХХХ) ХХХ ХХ ХХ">
+                        <label for="inputNumber" class="footer__label__red__text hide">Заполните это поле!</label>
+                        <button class="footer__form__button">Отправить</button>
+                    </form>
+                    <p class="text__privacy__policy">Нажимая на кнопку, вы даёте согласение на обработку персональных данных и с <a href="/door" class="link__privacy__policy">политикой конфиденциальности</a></p>
+                </div>
+            </div>
+            <hr>
+            <div class="footer__block__contact">
+                <div class="footer__block__image">
+                    <a href="/"><img src="/front/images/footer_img/footerLogo.svg" alt=""></a>
+                </div>
+                <div class="footer__block__catalog">
+                    <h2>Каталог</h2>
+                    <ul class="footer__catalog__list">
+                        <li class="footer__list__item"><a href="/">Каталог</a></li>
+                        <li class="footer__list__item"><a href="/our_work">Наши работы</a></li>
+                        <li class="footer__list__item"><a href="/services">Услуги</a></li>
+                        <li class="footer__list__item"><a href="/contacts">Контакты</a></li>
+                    </ul>
+                </div>
+                <div class="footer__block__contact__information">
+                    <h2>Контактная информация</h2>
+                    <ul class="">
+                        <li class="footer__list__item"><a class="phone__link footer__phone__link" href="tel:+38 (096) 123 45 67"><img src="/front/images/footer_img/Phone.svg" alt="Call +38 (096) 123 45 67" />+38 (096) 123 45 67</a></li>
+                        <li class="footer__list__item"><img src="/front/images/footer_img/timeImg.svg" alt="">пн-пт, 10:00-18:00</li>
+                        <li class="footer__list__item"><a class="footer__mail__link" href="mailto:someone@example.com"><img src="/front/images/footer_img/mail_img.svg" alt="">mail@gmail.com</a></li>
+                        <li class="footer__list__item"><img src="/front/images/footer_img/locationImg.svg" alt="">Одесса, ул. Французский бульвар 66/2</li>
+                    </ul>
+                </div>
+                <div class="footer__block__social__network">
+                    <h2>Мы в соцсетях</h2>
+                    <ul class="">
+                        <li class="footer__list__item"><a class="footer__link__facebook" href="https://uk-ua.facebook.com/"><img src="/front/images/footer_img/Facebook.svg" alt="facebook">Facebook</a></li>
+                        <li class="footer__list__item"><a class="footer__link__instagram" href="https://www.instagram.com/"><img src="/front/images/footer_img/Instagram.svg" alt="instagram">Instagram</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <div class="block__copyright">
+                <p>viknapro.od.ua © 2020</p>
+                <p>Разработано с любовью MantiCore Development</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script type="module" src="/node_modules/imask/dist/imask.min.js"></script>
+<script type="module" src="/front/js/footer.js"></script>
+
+<script type="text/javascript">
+    addingAndDeleteTextElement();
+    window.addEventListener('resize',function() {
+        addingAndDeleteTextElement();
+    });
+
+    function addingAndDeleteTextElement() {
+        const footerConnectionText = document.querySelector('.block__footer .block__connection__text .text__connection');
+        if(window.innerWidth > 991) {
+            footerConnectionText.classList.remove('hide');
+        }
+        if(window.innerWidth <= 991) {
+            footerConnectionText.classList.add('hide');
+        }
+    }
+</script>

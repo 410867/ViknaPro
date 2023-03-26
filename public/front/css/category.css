@@ -1,0 +1,263 @@
+body {
+    background: #FFFFFF;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 120px 0 280px 0;
+}
+
+.top__main__hr {
+    width: 100%;
+    height: 1px;
+    background: #EAEAEA;
+    border: 0;
+    margin: 0 0 32px 0;
+}
+
+.block__door,
+.block__blinds,
+.block__mosquitoNet,
+.block__garageDoor {
+    padding: 0 80px 0 80px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    max-width: 1290px;
+}
+
+.block__door p,
+.block__blinds p,
+.block__mosquitoNet p,
+.block__garageDoor p {
+    margin: 0 0 20px 0;
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: #A9A9A9;
+}
+
+.block__door p a,
+.block__blinds p a,
+.block__mosquitoNet p a,
+.block__garageDoor p a {
+    text-decoration: none;
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    letter-spacing: 0.02em;
+    color: #141414;
+}
+
+.block__door p span,
+.block__blinds p span,
+.block__mosquitoNet p span,
+.block__garageDoor p span {
+    margin: 0 12px 0 12px;
+}
+
+.block__door h2,
+.block__blinds h2,
+.block__mosquitoNet h2,
+.block__garageDoor h2 {
+    margin: 0 0 40px 0;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 48px;
+    line-height: 56px;
+    color: #141414;
+}
+
+.block__door__list,
+.block__blinds__list,
+.block__mosquitoNets__list,
+.block__garageDoors__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.block__door__item,
+.block__blinds__item,
+.block__mosquitoNet__item,
+.block__garageDoor__item {
+    width: 300px;
+    background: #F5F5F5;
+    border-radius: 8px;
+    margin: 1px;
+}
+
+.block__door__list .block__door__item:hover,
+.block__blinds__list .block__blinds__item:hover,
+.block__mosquitoNets__list .block__mosquitoNet__item:hover,
+.block__garageDoors__list .block__garageDoor__item:hover {
+    margin: 0;
+    border: 1px solid #A9A9A9;
+}
+
+.block__door__list .block__door__item:hover .block__text a,
+.block__blinds__list .block__blinds__item:hover .block__text a,
+.block__mosquitoNets__list .block__mosquitoNet__item:hover .block__text a,
+.block__garageDoors__list .block__garageDoor__item:hover .block__text a {
+    color: #A0000F;
+}
+
+.block__door__list .block__door__item:hover .block__text a img,
+.block__blinds__list .block__blinds__item:hover .block__text a img,
+.block__mosquitoNets__list .block__mosquitoNet__item:hover .block__text a img,
+.block__garageDoors__list .block__garageDoor__item:hover .block__text a img {
+    content: url("../images/arrow_right_Img_hover.svg");
+}
+
+.block__door__list .block__door__item .block__text,
+.block__blinds__list .block__blinds__item .block__text,
+.block__mosquitoNets__list .block__mosquitoNet__item .block__text,
+.block__garageDoors__list .block__garageDoor__item .block__text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.block__door__list .block__door__item .block__text h3,
+.block__blinds__list .block__blinds__item .block__text h3,
+.block__mosquitoNets__list .block__mosquitoNet__item .block__text h3,
+.block__garageDoors__list .block__garageDoor__item .block__text h3 {
+    margin: 0;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 24px;
+    color: #141414;
+}
+
+.block__door__list .block__door__item .block__text p,
+.block__blinds__list .block__blinds__item .block__text p,
+.block__mosquitoNets__list .block__mosquitoNet__item .block__text p,
+.block__garageDoors__list .block__garageDoor__item .block__text p {
+    margin: 12px 0 12px 0;
+    font-family: 'Gilroy-Light', sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: 0.02em;
+    color: #141414;
+}
+
+.block__door__list .block__door__item .block__text a,
+.block__blinds__list .block__blinds__item .block__text a,
+.block__mosquitoNets__list .block__mosquitoNet__item .block__text a,
+.block__garageDoors__list .block__garageDoor__item .block__text a {
+    text-decoration: none;
+    font-family: 'Gilroy-Medium', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    color: #D50808;
+    position: relative;
+}
+
+.block__door__list .block__door__item .block__text a img,
+.block__blinds__list .block__blinds__item .block__text a img,
+.block__mosquitoNets__list .block__mosquitoNet__item .block__text a img,
+.block__garageDoors__list .block__garageDoor__item .block__text a img {
+    position: absolute;
+    margin: 1px 0 0 8px;
+}
+
+@media all and (max-width: 991px) {
+    .main {
+        margin: 56px 0 48px 0;
+    }
+
+    .top__main__hr {
+        display: none;
+    }
+
+    .block__door, .block__blinds, .block__mosquitoNet, .block__garageDoor {
+        margin: 24px 20px 0 20px;
+        padding: 0 0 0 0;
+        align-items: flex-start;
+        flex-direction: column;
+        max-width: 330px;
+    }
+
+    .block__door__list, .block__blinds__list, .block__mosquitoNets__list, .block__garageDoors__list {
+        gap: 20px;
+    }
+
+    .block__door p, .block__blinds p, .block__mosquitoNet p, .block__garageDoor p {
+        margin: 0 0 12px 0;
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .block__door h2, .block__blinds h2, .block__mosquitoNet h2, .block__garageDoor h2 {
+        margin: 0 0 24px 0;
+        font-size: 28px;
+        line-height: 32px;
+    }
+
+    .block__door__list .block__door__item .block__text h3,
+    .block__blinds__list .block__blinds__item .block__text h3,
+    .block__mosquitoNets__list .block__mosquitoNet__item .block__text h3,
+    .block__garageDoors__list .block__garageDoor__item .block__text h3 {
+        margin: 0;
+        font-size: 18px;
+        line-height: 22px;
+    }
+
+    .block__door__list .block__door__item .block__text p,
+    .block__blinds__list .block__blinds__item .block__text p,
+    .block__mosquitoNets__list .block__mosquitoNet__item .block__text p,
+    .block__garageDoors__list .block__garageDoor__item .block__text p {
+        margin: 8px 0 8px 0;
+        font-size: 14px;
+        line-height: 22px;
+    }
+
+    .block__door__list .block__door__item .block__text a,
+    .block__blinds__list .block__blinds__item .block__text a,
+    .block__mosquitoNets__list .block__mosquitoNet__item .block__text a,
+    .block__garageDoors__list .block__garageDoor__item .block__text a {
+        font-size: 14px;
+        line-height: 18px;
+    }
+
+    .block__door__list .block__door__item .block__text a img,
+    .block__blinds__list .block__blinds__item .block__text a img,
+    .block__mosquitoNets__list .block__mosquitoNet__item .block__text a img,
+    .block__garageDoors__list .block__garageDoor__item .block__text a img {
+        width: 7px;
+        height: 12px;
+        margin: 2px 0 0 8px;
+    }
+}
+
+@media all and (max-width: 320px) {
+    .block__door__item, .block__blinds__item, .block__mosquitoNet__item, .block__garageDoor__item {
+        width: 250px;
+    }
+
+    .block__door__list .block__door__item img,
+    .block__blinds__list .block__blinds__item img,
+    .block__mosquitoNets__list .block__mosquitoNet__item img,
+    .block__garageDoors__list .block__garageDoor__item img {
+        width: 250px;
+        height: 183px;
+    }
+}

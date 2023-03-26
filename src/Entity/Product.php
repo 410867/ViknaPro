@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping\JoinColumn;
 use Doctrine\ORM\Mapping\ManyToOne;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product
+class Product implements SluggerEntityInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -31,6 +31,9 @@ class Product
 
     #[ORM\Column]
     private ?int $sort = 0;
+
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $slug = null;
 
     public function getId(): ?int
     {
@@ -93,6 +96,18 @@ class Product
     public function setSort(int $sort): self
     {
         $this->sort = $sort;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }

@@ -2,7 +2,9 @@
 
 {% block item_form %}
     <div class="col-6">
-        {{ form(form, {'attr': {'id': 'form-' ~ form.vars.id }}) }}
+        {% for f in form %}
+            {{ form_row(f) }}
+        {% endfor %}
     </div>
     <div class="col-6">
         {% if item.category %}

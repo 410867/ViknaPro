@@ -1,0 +1,244 @@
+{% extends '/front/base.html.twig' %}
+
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/index.css">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <div class="block__header__main">
+                <div class="block__background__text">
+                    <div class="block__text">
+                        <p class="red__text">Производство и установка</p>
+                        <h1 class="heading1__text">Металлопластиковых окон и дверей в одессе</h1>
+                        <p class="text">Значимость этих проблем настолько очевидна, что дальнейшее развитие различных
+                            форм деятельности не даёт нам иного выбора, кроме определения укрепления моральных
+                            ценностей. Являясь всего лишь частью общей картины, ключевые особенности структуры проекта и
+                            по сей день остаются уделом.</p>
+                        <button class="text__link">Получить бесплатный просчёт</button>
+                    </div>
+                </div>
+
+                <div class="block__image">
+                    <img class="header__logo__img1" src="/front/images/headerLogoImg1.svg" alt="">
+                    <img class="header__logo__img2" src="/front/images/headerLogoImg2.svg" alt="">
+                    <img class="header__logo__img3" src="/front/images/headerLogoImg3.svg" alt="">
+                </div>
+
+                <div class="block__header__image">
+                    <img class="header__image" src="/front/images/headerImg.svg" alt="">
+                    <div class="block__text__comment">
+                        <p class="text__comment">
+                            <img class="text__opening__quotes" src="/front/images/openingQuotes.svg"
+                                 alt="Opening quotes">Доверие строится годами.
+                            <br>Поэтому клиенты нас рекомендуют.<img class="text__closing__quotes"
+                                                                     src="/front/images/closingQuotes.svg"
+                                                                     alt="Closing quotes">
+                        </p>
+                    </div>
+                    <div class="block__text__number__clients">
+                        <p class="text__number">1000+</p>
+                        <p class="text__clients">довольных клиентов</p>
+                    </div>
+                </div>
+            </div>
+            <div class="block__main__about__company">
+                <div class="block__about__company">
+                    <img class="about__company__image" src="/front/images/aboutCompanyImg.svg" alt="">
+                    <div class="block__text__about__company">
+                        <p class="red__text">10 лет опыта</p>
+                        <h2 class="heading2__text">О компании</h2>
+                        <p class="text">Лишь явные признаки победы институционализации функционально разнесены на
+                            независимые элементы. Диаграммы связей, вне зависимости от их уровня, должны быть
+                            обнародованы.
+                            <br><br>Следует отметить, что существующая теория выявляет срочную потребность как
+                            самодостаточных, так и внешне зависимых концептуальных решений. В своём стремлении улучшить
+                            пользовательский опыт мы упускаем, что непосредственные участники технического прогресса
+                            могут быть ограничены исключительно образом мышления.
+                        </p>
+                        <div class="block__text__message">
+                            <img class="text__message__opening__quotes" src="/front/images/openingQuotes.svg" alt="">
+                            <p class="text__message">Доверие строится годами.<br>Поэтому клиенты нас рекомендуют.</p>
+                            <img class="text__message__closing__quotes" src="/front/images/closingQuotes.svg" alt="">
+                            <p class="bottom__text">Владимир, основатель <span class="red__bottom__text">ViknaPro</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__main__benefits">
+                <div class="block__benefits">
+                    <h2>Наши преимущества</h2>
+                    <div class="block__benefits__text">
+                        <div class="big__block__quality__text">
+                            <div class="block__quality__text">
+                                <img src="/front/images/qualityImg.svg" alt="">
+                                <h3>Качество</h3>
+                                <p>Мы используем только качественные и проверенные бренды</p>
+                            </div>
+                        </div>
+                        <div class="big__block__experience__text">
+                            <div class="block__experience__text">
+                                <img src="/front/images/experienceImg.svg" alt="">
+                                <h3>Большой опыт</h3>
+                                <p>Мы используем только качественные и проверенные бренды</p>
+                            </div>
+                        </div>
+                        <div class="big__block__guarantee__text">
+                            <div class="block__guarantee__text">
+                                <img src="/front/images/guaranteeImg.svg" alt="">
+                                <h3>Гарантия</h3>
+                                <p>Мы даём гарантию на 10 лет на установленную нами продукцию</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="block__main__invitation">
+                <div class="block__invitation">
+                    <div class="block__invitation__text">
+                        <h2>Приглашаем к сотрудничеству</h2>
+                        <p>
+                            Следует отметить, что существующая теория выявляет срочную потребность как самодостаточных,
+                            так и внешне зависимых концептуальных решений. В своём стремлении улучшить пользовательский
+                            опыт мы упускаем, что непосредственные участники технического прогресса могут быть
+                            ограничены исключительно образом мышления.
+                        </p>
+                        <button>Узнать детали</button>
+                    </div>
+                    <img class="invitation__image" src="/front/images/invitationImg.svg" alt="">
+                </div>
+            </div>
+            <div class="block__main__production">
+                <div class="block__production">
+                    <h2>Наша продукция</h2>
+                    <div class="block__production__list">
+                        {% if parent_categories is not defined %}
+                            {% set parent_categories = parent_categories() %}
+                        {% endif %}
+
+                        {% for category in parent_categories %}
+                            <div class="block__production__item block__production__item__hover">
+                                <img src="{{ category.img|app_img }}" alt="">
+                                <h3>{{ category.title }}</h3>
+                                <p>{{ category.description }}</p>
+                                <a href="{{ path('category', {'slug': category.slug}) }}">Смотреть каталог <img
+                                            src="/front/images/arrow_right_Img.svg"
+                                            alt="arrow right"></a>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="block__main__services">
+                <div class="block__services">
+                    <h2>Наши услуги</h2>
+                    <div class="main__block__services__list">
+                        <hr>
+                        <div class="block__services__item">
+                            <h3>Ремонт квартир</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
+                            <img src="/front/images/next_btn.svg" alt="">
+                        </div>
+                        <hr>
+                        <div class="block__services__item">
+                            <h3>Установка окон</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
+                            <img src="/front/images/next_btn.svg" alt="">
+                        </div>
+                        <hr>
+                        <div class="block__services__item">
+                            <h3>Установка дверей</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
+                            <img src="/front/images/next_btn.svg" alt="">
+                        </div>
+                        <hr>
+                        <div class="block__services__item">
+                            <h3>Замер</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
+                            <img src="/front/images/next_btn.svg" alt="">
+                        </div>
+                        <hr>
+                        <div class="block__services__item">
+                            <h3>Регулировка окон</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
+                            <img src="/front/images/next_btn.svg" alt="">
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+            <div class="block__main__slider__comments">
+                <div class="block__slider__comments">
+                    <h2>Отзывы</h2>
+                    <div class="main__slider">
+                        <div class="main__slider__item">
+                            <img src="/front/images/slider_quotes.svg" alt="comments slide">
+                            <h3>Theresa Webb</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть обнародованы.</p>
+                        </div>
+                        <div class="main__slider__item">
+                            <img src="/front/images/slider_quotes.svg" alt="comments slide">
+                            <h3>Theresa Webb</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть обнародованы.</p>
+                        </div>
+                        <div class="main__slider__item">
+                            <img src="/front/images/slider_quotes.svg" alt="comments slide">
+                            <h3>Theresa Webb</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть обнародованы.</p>
+                        </div>
+                        <div class="main__slider__item">
+                            <img src="/front/images/slider_quotes.svg" alt="comments slide">
+                            <h3>Theresa Webb</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть обнародованы.</p>
+                        </div>
+                        <div class="main__slider__item">
+                            <img src="/front/images/slider_quotes.svg" alt="comments slide">
+                            <h3>Theresa Webb</h3>
+                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
+                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть обнародованы.</p>
+                        </div>
+                    </div>
+                    <button class="btn__add__review">Добавить отзыв</button>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal__window__review">
+        <div class="popup__body">
+            <div class="popup__content">
+                <img class="button__close review" src="/front/images/imgClose.svg" alt="close">
+                <div class="block__form">
+                    <h2 class="modal_title">Оставить отзыв</h2>
+                    <form class="form__review">
+                        <div class="block__name">
+                            <label for="inputName" class="">Имя</label>
+                            <input type="text" class="input__name" id="inputName" placeholder="Алексей">
+                        </div>
+                        <div class="block__comment">
+                            <label for="textareaComment" class="">Комментарий</label>
+                            <textarea maxlength="200" class="textarea__comment" id="textareaComment"
+                                      placeholder="Есть ещё что-то о чём мы должны знать?"></textarea>
+                        </div>
+                        <button class="modal_button__post__review">Отправить</button>
+                    </form>
+                    <button class="modal__review__button__close hide">Окей</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="/front/js/index.js"></script>
+{% endblock %}

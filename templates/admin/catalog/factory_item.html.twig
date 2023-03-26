@@ -1,0 +1,41 @@
+{% extends 'admin/base_item.html.twig' %}
+{% block item_form %}
+    <div class="col-6">
+        {% for f in form %}
+            {{ form_row(f) }}
+        {% endfor %}
+    </div>
+    <div class="col-6">
+        {% if item.category %}
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <h5 class="mb-3">{{ 'Category'|trans }}:</h5>
+                    <div class="row">
+                        {% include 'admin/catalog/_item_card.html.twig' with {'item': item.category, 'item_route': 'admin_catalog_category_item'} %}
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+        {% if item.id %}
+            <div class="row mt-3">
+                <div class="col-lg-12">
+                    <h5 class="mb-3">{{ 'Collection'|trans }}:</h5>
+                    <div class="row">
+                        {% for itemCard in item.categoryCollection %}
+                            {% include 'admin/catalog/_item_card.html.twig' with { item: itemCard, item_route: 'admin_catalog_collection_item'} %}
+                        {% endfor %}
+                    </div>
+                    <div style="margin-bottom: 10px; text-align: right">
+                        <a href="{{ path('admin_catalog_collection_item_new', {'factory': item.id}) }}"
+                           class="btn btn-success btn-lg btn-block">
+                            {{ 'Add new' }}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

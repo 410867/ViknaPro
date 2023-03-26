@@ -8,12 +8,16 @@
                 <div class="card-body">
                     <div id="basic-example" role="application" class="wizard clearfix">
                         <div class="content clearfix">
+                            {{ form_start(form, {'attr': {'id': 'form-' ~ form.vars.id }}) }}
                             <section id="basic-example-p-0" role="tabpanel" aria-labelledby="basic-example-h-0"
                                      class="body current row" aria-hidden="false">
                                 {% block item_form %}
-                                    {{ form(form, {'attr': {'id': 'form-' ~ form.vars.id }}) }}
+                                    {% for f in form %}
+                                        {{ form_row(f) }}
+                                    {% endfor %}
                                 {% endblock %}
                             </section>
+                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>

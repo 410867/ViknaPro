@@ -28,6 +28,7 @@ class CategoryType extends AbstractType
                 'current_category_id' => $categoryId
             ])
             ->add('title')
+            ->add('slug')
             ->add('description', TextareaType::class, [
                 'required' => false
             ])

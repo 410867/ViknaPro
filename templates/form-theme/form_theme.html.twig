@@ -59,13 +59,14 @@
 {% endblock %}
 
 {% block video_widget %}
-    {% if data %}
-        {#        <iframe src="{{ data }}"></iframe> #}
-    {% endif %}
+        <div>
+            <iframe width="100%" height="100%"
+                    src="https://www.youtube.com/embed/{{ data|app_youtube_video_id }}"></iframe>
+        </div>
     {{ form_widget(form) }}
 {% endblock %}
 
-{% block collection_entry_widget %}
+{% block collection_entry_row %}
     {% set entry_id = id ~ 'entry' %}
     <div class="col-6" id="{{ entry_id }}" style="margin-top: 0.5rem">
         {{ form_widget(form) }}
@@ -84,20 +85,9 @@
             {{ stimulus_controller('admin/form_collection') }}
     >
         <div id="{{ id }}" class="row" data-index="{{ data|length }}"
-             data-prototype="{{ form_widget(prototype)|e('html_attr') }}">
+             data-prototype="{{ form_row(prototype)|e('html_attr') }}">
             {% for f in form %}
-                {{ form_widget(f) }}
-                {#            {% set entry_id = id ~ '_entry_' ~ loop.index %} #}
-                {#            <div class="col-6" id="{{ entry_id }}"> #}
-                {#                {{ form_widget(f) }} #}
-                {#                <div class="d-grid gap-2" style="margin-top: 0.5rem;"> #}
-                {#                    <button class="btn btn-danger" #}
-                {#                            type="button" #}
-                {#                            {{ stimulus_action('admin/form_collection', 'remove', 'click', {'id': entry_id}) }}> #}
-                {#                        {{ 'Delete'|trans }} #}
-                {#                    </button> #}
-                {#                </div> #}
-                {#            </div> #}
+                {{ form_row(f) }}
             {% endfor %}
         </div>
         <div class="d-grid gap-2" style="margin-top: 0.5rem;">

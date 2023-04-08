@@ -1,0 +1,11 @@
+****Run project
+
+```shell
+docker-compose up -d
+
+docker-compose exec php composer install
+docker-compose exec php bin/console doc:mig:mig --no-interaction
+
+docker-compose run node yarn install
+docker-compose run node yarn build
+```

@@ -1,5 +1,12 @@
 @import url('https://fonts.cdnfonts.com/css/gilroy-bold');
 
+body {
+    background: #FFFFFF;
+    margin: 0;
+    position: relative;
+    overflow-x: hidden;
+}
+
 .block__shadow {
     display: none;
 }

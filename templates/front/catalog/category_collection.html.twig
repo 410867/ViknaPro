@@ -16,12 +16,12 @@
                 <h2>{{ category.title }}</h2>
 
                 {% for factory in category.factories %}
-                    <img src="{{ factory.img|app_img }}" alt="">
+                    <img class="img__icon" src="{{ factory.img|app_img }}" alt="">
                     <div class="block__interiorDoor__list slider_1">
 
                         {% for collection in factory.categoryCollection %}
                             <div class="block__interiorDoor__item">
-                                <img src="{{ collection.img|app_img }}" alt="">
+                                <img class="item__img" src="{{ collection.img|app_img }}" alt="">
                                 <div class="block__text">
                                     <h3>{{ collection.title }}</h3>
                                     <p>{{ collection.description }}</p>

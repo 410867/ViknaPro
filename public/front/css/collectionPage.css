@@ -1,9 +1,3 @@
-body {
-    background: #FFFFFF;
-    margin: 0;
-    overflow-x: hidden;
-}
-
 .main {
     width: 100%;
     display: flex;
@@ -31,7 +25,8 @@ body {
 .block__main__body {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 138px;
     width: 1520px;
 }
 
@@ -280,10 +275,13 @@ body {
     background: #F5F5F5;
     border-radius: 4px;
     cursor: pointer;
+    width: 200px;
 }
 
 .block__main__body .block__list__collections .block__item__collection .block__img__collection img {
-    padding: 30px;
+    padding: 20px;
+    width: 160px;
+    height: 290px;
 }
 
 .block__main__body .block__list__collections .block__item__collection p {

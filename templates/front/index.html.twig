@@ -120,7 +120,7 @@
 
                         {% for category in parent_categories %}
                             <div class="block__production__item block__production__item__hover">
-                                <img src="{{ category.img|app_img }}" alt="">
+                                <img class="item__img" src="{{ category.img|app_img }}" alt="">
                                 <h3>{{ category.title }}</h3>
                                 <p>{{ category.description }}</p>
                                 <a href="{{ path('category', {'slug': category.slug}) }}">Смотреть каталог <img

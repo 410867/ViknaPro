@@ -15,7 +15,7 @@
 
                     {% for subCategory in category.children %}
                         <div class="block__door__item">
-                            <img src="{{ subCategory.img|app_img }}" alt="">
+                            <img class="item__img" src="{{ subCategory.img|app_img }}" alt="">
                             <div class="block__text">
                                 <h3>{{ subCategory.title }}</h3>
                                 <p>{{ subCategory.description }}</p>

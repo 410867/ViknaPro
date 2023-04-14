@@ -650,6 +650,8 @@
     width: 100%;
     height: 300px;
     object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .block__main__production .block__production .block__production__item h3 {

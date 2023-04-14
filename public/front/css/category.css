@@ -107,6 +107,8 @@
     width: 100%;
     height: 300px;
     object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .block__door__list .block__door__item:hover .block__text a,

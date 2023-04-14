@@ -100,6 +100,8 @@
     width: 270px;
     height: 189px;
     object-fit: cover;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .block__accessories__list .block__accessories__item .accessories__text {

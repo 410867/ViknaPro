@@ -92,7 +92,8 @@
     width: 100%;
     height: 300px;
     object-fit: cover;
-    border-radius: 8px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
 }
 
 .block__interiorDoor__list .block__interiorDoor__item .block__text {

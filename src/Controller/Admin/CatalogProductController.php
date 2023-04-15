@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-use App\Attribute\MenuItem;
 use App\Controller\AppAbstractController;
 use App\Entity\Product;
 use App\Form\Catalog\ProductType;
@@ -33,7 +32,6 @@ final class CatalogProductController extends AppAbstractController
         $this->productRepository = $productRepository;
     }
 
-    #[MenuItem(parentRoute: 'admin_catalog')]
     #[Route(self::ADMIN_PATH.'/catalog/product', name: 'admin_catalog_product')]
     public function index(ProductFilter $filter): Response
     {

@@ -12,60 +12,12 @@ File: Main Js File
 
     'use strict';
 
-    var language = localStorage.getItem('language');
-    // Default Language
-    var default_lang = 'en';
-
-    function setLanguage(lang) {
-        if (document.getElementById("header-lang-img")) {
-            if (lang == 'en') {
-                document.getElementById("header-lang-img").src = "/images/flags/us.jpg";
-            } else if (lang == 'sp') {
-                document.getElementById("header-lang-img").src = "/images/flags/spain.jpg";
-            }
-            else if (lang == 'gr') {
-                document.getElementById("header-lang-img").src = "/images/flags/germany.jpg";
-            }
-            else if (lang == 'it') {
-                document.getElementById("header-lang-img").src = "/images/flags/italy.jpg";
-            }
-            else if (lang == 'ru') {
-                document.getElementById("header-lang-img").src = "/images/flags/russia.jpg";
-            }
-            localStorage.setItem('language', lang);
-            language = localStorage.getItem('language');
-            getLanguage();
-        }
-    }
-
-    // Multi language setting
-    function getLanguage() {
-        (language == null) ? setLanguage(default_lang) : false;
-        $.getJSON('/lang/' + language + '.json', function (lang) {
-            $('html').attr('lang', language);
-            $.each(lang, function (index, val) {
-                (index === 'head') ? $(document).attr("title", val['title']) : false;
-                $("[key='" + index + "']").text(val);
-            });
-        });
-    }
-
     function initMetisMenu() {
         //metis menu
         $("#side-menu").metisMenu();
     }
 
-    function initLeftMenuCollapse() {
-        $('#vertical-menu-btn').on('click', function (event) {
-            event.preventDefault();
-            $('body').toggleClass('sidebar-enable');
-            if ($(window).width() >= 992) {
-                $('body').toggleClass('vertical-collpsed');
-            } else {
-                $('body').removeClass('vertical-collpsed');
-            }
-        });
-    }
+
 
     function initActiveMenu() {
         // === following js will activate the menu in left side bar based on url ====
@@ -269,15 +221,6 @@ File: Main Js File
             sessionStorage.setItem("is_visited", "dark-rtl-mode-switch");
         }
 
-    }
-
-    function initLanguage() {
-        // Auto Loader
-        if (language != null && language !== default_lang)
-            setLanguage(language);
-        $('.language').on('click', function (e) {
-            setLanguage($(this).attr('data-lang'));
-        });
     }
 
     function initCheckAll() {

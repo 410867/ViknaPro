@@ -1,0 +1,31 @@
+{% extends 'front/base.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/services.css?v=1">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__services">
+                <p><a href="/">Главная</a><span>/</span>Услуги</p>
+                <h2>Наши услуги</h2>
+                <div class="main__block__services__list">
+                    <hr class="first__hr__services">
+                    {% for item in rows %}
+                        <div class="block__services__item" data-href="{{ path('service_item', {'slug': item.slug}) }}">
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.descriptionShort }}</p>
+                            <img src="/front/images/next_btn.svg" alt="">
+                        </div>
+                        <hr>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}
+
+{% block js %}
+    <script type="module" src="{{ asset_version('/front/js/services.js?v1') }}"></script>
+{% endblock %}

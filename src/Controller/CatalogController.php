@@ -41,9 +41,9 @@ final class CatalogController extends AppAbstractController
     }
 
     #[Route('/catalog/our-works', name: 'our_works', methods: ['GET'])]
-    public function ourWorks(Category $category): Response
+    public function ourWorks(): Response
     {
-        return $this->render('/front/catalog/our_works.html.twig', ['category' => $category]);
+        return $this->render('/front/catalog/our_works.html.twig');
     }
 
     #[Route('/catalog/collection/products/{slug}', name: 'collection_products', methods: ['GET'])]

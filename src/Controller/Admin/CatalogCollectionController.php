@@ -29,7 +29,6 @@ final class CatalogCollectionController extends AppAbstractController
         $this->factoryRepository = $factoryRepository;
     }
 
-    #[MenuItem(parentRoute: 'admin_catalog')]
     #[Route(self::ADMIN_PATH.'/catalog/collection', name: 'admin_catalog_collection')]
     public function index(Filter $filter): Response
     {

@@ -1,0 +1,42 @@
+{% extends 'admin/base_index.html.twig' %}
+{% block  stylesheets %}
+    {{ parent() }}
+{% endblock %}
+
+{% block rows_table %}
+    <table class="table align-middle table-nowrap table-check">
+        <thead class="table-light">
+        <tr>
+            <th class="align-middle"> {{ 'ID'|trans }}</th>
+            <th class="align-middle"> {{ 'Title'|trans }}</th>
+            <th class="align-middle">{{ 'Main img'|trans }}</th>
+            <th class="align-middle">{{ 'Short description'|trans }}</th>
+            <th class="align-middle">{{ 'Action'|trans }}</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in rows %}
+            <tr class="odd">
+                <td>{{ item.id }}</td>
+                <td>{{ item.title }}</td>
+                <td>
+                    <img src="{{ item.mainImg|app_img }}" class="img-thumbnail"
+                         width="200px">
+                </td>
+                <td>{{ item.deescriptionShort }}</td>
+                <td>
+                    <a href="{{ path('admin_service_item', {'id': item.id}) }}"
+                       type="button" class="btn btn-primary btn-sm btn-rounded">
+                        {{ 'Edit'|trans }}
+                    </a>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}

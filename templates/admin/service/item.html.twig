@@ -1,0 +1,26 @@
+{% extends 'admin/base_item.html.twig' %}
+
+{% block item_form %}
+    <div class="col-12">
+        {% for f in form %}
+
+            {% if (f.vars.name == 'workSteps') %}
+                {% do f.setRendered %}
+                <div class="row">
+                    {% for item in f %}
+                        <div class="col-6" id="{{ item.vars.id }}entry" style="margin-top: 0.5rem">
+                            <label for="{{ item.vars.id }}">{{ loop.index }}</label>
+                            {{ form_widget(item) }}
+                            {{ form_errors(item) }}
+                        </div>
+                    {% endfor %}
+                </div>
+                {{ form_errors(f) }}
+             {% else %}
+                 {{ form_row(f) }}
+                 {{ form_errors(f) }}
+            {% endif %}
+        {% endfor %}
+        {{ form_errors(form) }}
+    </div>
+{% endblock %}

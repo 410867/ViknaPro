@@ -1,0 +1,73 @@
+{% extends 'front/base.html.twig' %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="/front/css/servicesRenovation.css?v=1">
+{% endblock %}
+
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__services__renovation">
+                <p><a href="/">Главная</a><span>/</span><a
+                            href="{{ path('service') }}">Услуги</a><span>/</span>{{ item.title }}</p>
+                <h2>{{ item.title }}</h2>
+                <div class="block__main__renovation">
+                    <div class="block__renovation">
+                        <div class="block__img__renovation">
+                            <img class="big__img__renovation" src="{{ item.mainImg|app_img }}" alt="">
+                            <img class="img__renovation__mobile" src="{{ item.mainImg|app_img }}" alt="">
+                        </div>
+                        <div class="block__renovation__text">
+                            <p>
+                                {{ item.description }}
+                            </p>
+                            <img class="img__renovation__desktop" src="{{ item.textImg|app_img }}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="block__stages__work">
+                        <h2>Этапы работы</h2>
+                        <hr>
+
+                        {% for steps in item.workSteps|batch(2) %}
+                            <div class="block__stages__work__list">
+                                {% set i1 = loop.index == 1 ? 1 : 3 %}
+                                {% set i2 = loop.index == 1 ? 2 : 4 %}
+                                <div class="block__stages__work__text">
+                                    <p class="red__text">0{{ i1 }}</p>
+                                    <p>{{ steps[i1-1] }}</p>
+                                </div>
+
+                                <hr class="hr__mobile">
+
+                                <div class="block__stages__work__text">
+                                    <p class="red__text">0{{ i2 }}</p>
+                                    <p>{{ steps[i2-1] }}</p>
+                                </div>
+                            </div>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="block__footer__main">
+                <div class="block__information">
+                    <div class="block__heading__information">
+                        <h2>Почему<img src="/front/images/heading_block_information_img.svg" alt="">мы?</h2>
+                    </div>
+                    <hr>
+
+                    {% for el in item.whyWe %}
+                        <div class="block__text__information">
+                            <h3>{{ el.title }}</h3>
+                            <p>{{ el.description }}</p>
+                        </div>
+                        <hr>
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

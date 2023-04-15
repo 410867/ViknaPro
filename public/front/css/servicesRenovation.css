@@ -24,10 +24,17 @@
 
 .img__renovation__mobile {
     display: none;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .img__renovation__desktop {
     display: block;
+    margin: 0 0 0 0;
+    width: 480px;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .block__services__renovation p {
@@ -84,11 +91,11 @@
 }
 
 .big__img__renovation {
+    width: 630px;
+    height: 720px;
     margin: 0 120px 0 0;
-}
-
-.img__renovation__desktop {
-    margin: 0 0 0 0;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .block__main__renovation .block__renovation .block__renovation__text p {

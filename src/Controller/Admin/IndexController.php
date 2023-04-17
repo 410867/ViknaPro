@@ -12,6 +12,6 @@ final class IndexController extends AppAbstractController
     #[Route(self::ADMIN_PATH.'/', name: 'admin_index', methods: ['GET'])]
     public function index(EntityManagerInterface $em): Response
     {
-        return $this->render('admin/index.html.twig');
+        return $this->redirectToRoute('admin_catalog_category');
     }
 }

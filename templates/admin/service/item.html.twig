@@ -7,6 +7,7 @@
             {% if (f.vars.name == 'workSteps') %}
                 {% do f.setRendered %}
                 <div class="row">
+                    {{ form_label(f) }}
                     {% for item in f %}
                         <div class="col-6" id="{{ item.vars.id }}entry" style="margin-top: 0.5rem">
                             <label for="{{ item.vars.id }}">{{ loop.index }}</label>

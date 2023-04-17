@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Object\Category\CategoryFilter;
 use App\Object\Filter;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\DBAL\Exception;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -86,5 +87,17 @@ class CategoryRepository extends ServiceEntityRepository
         $qb->addOrderBy('c.sort');
 
         return new Paginator($qb);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function getAllImages(int $limit = 9): array
+    {
+        $sql = 'select json_array_elements(images) img 
+from category where images is not null and json_array_length(images) >= 0 order by sort ASC limit :limit';
+        $items = $this->_em->getConnection()->executeQuery($sql, ['limit' => $limit])->fetchAllAssociative();
+
+        return array_map(fn (array $item) => str_replace(['"', '\\'], '', $item['img']), $items);
     }
 }

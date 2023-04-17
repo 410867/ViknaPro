@@ -2,54 +2,15 @@
     <div class="block__footer">
         <h2 class="header__slide">Наши работы</h2>
         <div class="footer__slider">
+
+            {% for img in categories_images() %}
             <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide1.svg" alt="footer slide">
+                <img src="{{ img|app_img }}" alt="footer slide">
             </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide2.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide3.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide4.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide5.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide1.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide2.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide3.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide4.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide5.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide1.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide2.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide3.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide4.svg" alt="footer slide">
-            </div>
-            <div class="slider__item">
-                <img src="/front/images/footer_img/footer_slide5.svg" alt="footer slide">
-            </div>
+            {% endfor %}
 
         </div>
-        <a class="bottom__slider__link" href="/our_work">Все работы</a>
+        <a class="bottom__slider__link" href="{{ path('our_works') }}">Все работы</a>
         <div class="footer__block__info">
             <hr>
             <div class="block__connection">
@@ -79,10 +40,10 @@
                 <div class="footer__block__catalog">
                     <h2>Каталог</h2>
                     <ul class="footer__catalog__list">
-                        <li class="footer__list__item"><a href="/">Каталог</a></li>
-                        <li class="footer__list__item"><a href="/our_work">Наши работы</a></li>
-                        <li class="footer__list__item"><a href="/services">Услуги</a></li>
-                        <li class="footer__list__item"><a href="/contacts">Контакты</a></li>
+                        <li class="footer__list__item"><a href="#" id="catalog_footer_button">Каталог</a></li>
+                        <li class="footer__list__item"><a href="{{ path('our_works') }}">Наши работы</a></li>
+                        <li class="footer__list__item"><a href="{{ path('service') }}">Услуги</a></li>
+                        <li class="footer__list__item"><a href="{{ path('contact') }}">Контакты</a></li>
                     </ul>
                 </div>
                 <div class="footer__block__contact__information">
@@ -112,7 +73,7 @@
 </footer>
 
 <script type="module" src="/front/js/imask.min.js"></script>
-<script type="module" src="/front/js/footer.js"></script>
+<script type="module" src="/front/js/footer.js?v=6"></script>
 <script type="module" src="/front/js/footerWithSlide.js"></script>
 
 <script type="text/javascript">

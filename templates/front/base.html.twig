@@ -18,14 +18,107 @@
 
 <div class="block__shadow"></div>
 
-{% include ("/front/partials/header.html.twig") %}
+{% if parent_categories is not defined %}
+    {% set parent_categories = parent_categories() %}
+{% endif %}
+<header class="header">
+    <div class="block__desktop__header hide">
+        <div class="header__block">
+            {% block header_top %}
+                <div class="header__top">
+                    <div class="header__top__left">
+                        <div class="language">
+                            <img src="/front/images/header_img/Group_5079.svg" alt="language">
+                            <a href="/door" class="language__link language__UA">UA</a>
+                            <a href="/door" class="language__link language__selected">RU</a>
+                        </div>
+                        <div class="phone">
+                            <a class="phone__link" href="tel:+38 (096) 123 45 67"><img
+                                        src="/front/images/header_img/Phone.svg" alt="Call +38 (096) 123 45 67"/>+38
+                                (096)
+                                123 45 67</a>
+                        </div>
+                        <div class="time">
+                            <img src="/front/images/header_img/Time.svg" alt="time">
+                            <p class="text__time">пн-пт, 10:00-18:00</p>
+                        </div>
+                    </div>
+                    <div class="header__top__right">
+                        <div class="facebook">
+                            <a class="link__facebook" href="https://uk-ua.facebook.com/"><img
+                                        src="/front/images/header_img/Facebook.svg" alt="facebook">Facebook</a>
+                        </div>
+                        <div class="instagram">
+                            <a class="link__instagram" href="https://www.instagram.com/"><img
+                                        src="/front/images/header_img/Instagram.svg" alt="instagram">Instagram</a>
+                        </div>
+                    </div>
+                </div>
+            {% endblock %}
+            <div class="header__bottom">
+                <div class="block__logo">
+                    <a href="/"><img src="/front/images/header_img/Logo.svg" alt="logo"></a>
+                </div>
+                <div class="block__nav">
+                    <nav class="header__nav">
+                        <a id="catalog_header_button" class="header__nav__item catalog__list">Каталог <img
+                                    src="/front/images/header_img/Down_Arrow_3_.svg" alt="down arrow"
+                                    class="img__down-arrow"></a>
+                        <a href="{{ path('our_works') }}" class="header__nav__item">Наши работы</a>
+                        <a class="header__nav__item services__list" href="{{ path('service') }}">Услуги <img
+                                    src="/front/images/header_img/Down_Arrow_3_.svg" alt="down arrow"
+                                    class="header__nav__item"></a>
+                        <a href="{{ path('contact') }}" class="header__nav__item">Контакты</a>
+                    </nav>
+                </div>
+                <div class="block__contact">
+                    <button class="button__contact">Связаться с нами</button>
+                </div>
+            </div>
+        </div>
+        <hr class="header__line hide">
+        <div class="block__catalog__list hide">
+            {% for category in parent_categories %}
+                <div class="header__block__window">
+                    <a href="{{ path('category', { 'slug': category.slug }) }}"><h3
+                                class="text__window">{{ category.title }}</h3></a>
+                    <ul class="list__item">
+                        {% for subCategory in category.children %}
+                            <li class="item">
+                                <a href="{{ path('category', { 'slug': subCategory.slug }) }}"
+                                   class="item__text">
+                                    {{ subCategory.title }}
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="block__services__list hide"></div>
+    </div>
 
+    <div class="block__mobile__header hide">
+        <hr class="header__mobile__hr">
+        <div class="block__header__mobile">
+            <img class="menu__header__mobile__img" src="/front/images/header_img/img_menu_header_mobile.svg" alt="">
+            <a href="/"><img class="logo__header__mobile" src="/front/images/header_img/img_logo_header_mobile.svg"
+                             alt=""></a>
+            <img class="btn__contact__header__mobile" src="/front/images/header_img/img_btn_contact_header_mobile.svg"
+                 alt="">
+        </div>
+        <hr class="header__mobile__hr">
+    </div>
+</header>
 {% block body %}
 {% endblock %}
 
 {%- include ("/front/partials/mobileHeaderMenu.html.twig") %}
 {%- include ("/front/partials/modalWindowContact.html.twig") %}
-{%- include ("/front/partials/footerWithSlide.html.twig") %}
+
+{% block footer %}
+    {%- include ("/front/partials/footerWithSlide.html.twig") %}
+{% endblock %}
 
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 <script type="text/javascript" src="/front/js/slick.min.js"></script>

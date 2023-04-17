@@ -136,41 +136,15 @@
                     <h2>Наши услуги</h2>
                     <div class="main__block__services__list">
                         <hr>
-                        <div class="block__services__item">
-                            <h3>Ремонт квартир</h3>
-                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
-                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
-                            <img src="/front/images/next_btn.svg" alt="">
-                        </div>
-                        <hr>
-                        <div class="block__services__item">
-                            <h3>Установка окон</h3>
-                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
-                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
-                            <img src="/front/images/next_btn.svg" alt="">
-                        </div>
-                        <hr>
-                        <div class="block__services__item">
-                            <h3>Установка дверей</h3>
-                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
-                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
-                            <img src="/front/images/next_btn.svg" alt="">
-                        </div>
-                        <hr>
-                        <div class="block__services__item">
-                            <h3>Замер</h3>
-                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
-                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
-                            <img src="/front/images/next_btn.svg" alt="">
-                        </div>
-                        <hr>
-                        <div class="block__services__item">
-                            <h3>Регулировка окон</h3>
-                            <p>Лишь явные признаки победы институционализации функционально разнесены на независимые
-                                элементы. Диаграммы связей, вне зависимости от их уровня, должны быть.</p>
-                            <img src="/front/images/next_btn.svg" alt="">
-                        </div>
-                        <hr>
+                        {% for item in services %}
+                            <div class="block__services__item"
+                                 data-href="{{ path('service_item', {'slug': item.slug}) }}">
+                                <h3>{{ item.title }}</h3>
+                                <p>{{ item.descriptionShort }}</p>
+                                <img src="/front/images/next_btn.svg" alt="">
+                            </div>
+                            <hr>
+                        {% endfor %}
                     </div>
                 </div>
             </div>
@@ -240,5 +214,5 @@
 {% endblock %}
 
 {% block js %}
-    <script type="module" src="/front/js/index.js"></script>
+    <script type="module" src="/front/js/index.js?v=1"></script>
 {% endblock %}

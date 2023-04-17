@@ -18,19 +18,11 @@ export function blockServicesItemHover() {
     const blockServices = document.querySelectorAll('.block__services__item');
     const images = document.querySelectorAll('.block__services__item img');
 
-    const servicesLinks = [
-        'Renovation_of_apartments',
-        '',
-        '',
-        '',
-        '',
-    ];
-
     blockServices.forEach((serviceItem, i) => {
         addMouseEnterServiceItem(serviceItem, images, i);
         addMouseLeaveServiceItem(serviceItem, images, i);
         serviceItem.onclick = () => {
-            location.href=`/services/${servicesLinks[i]}`;
+            location.href = serviceItem.getAttribute('data-href');
         }
     });
 }

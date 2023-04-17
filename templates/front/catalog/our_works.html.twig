@@ -12,14 +12,14 @@
                 <p><a href="/">Главная</a><span>/</span>Наши работы</p>
                 <h2>Наши работы</h2>
                 <div class="block__ourWork__list">
-                    {% for item in categoryCollection %}
+                    {% for item in categories %}
                         <div class="block__ourWork__item">
                             <img class="ourWork__item__img" src="{{ item.img|app_img }}" alt="">
                             <div class="block__text">
                                 <h3>{{ item.title }}</h3>
                                 <p>{{ item.description }}</p>
                                 <a href="{{ path('collection_products', {'slug': item.slug}) }}">
-                                    Смотреть коллекцию
+                                    Смотреть галерею
                                     <img src="/front/images/arrow_right_Img.svg" alt="">
                                 </a>
                             </div>
@@ -29,4 +29,9 @@
             </div>
         </div>
     </main>
+{% endblock %}
+
+
+{% block footer %}
+    {%- include ("/front/partials/footerWithoutSlider.html.twig") %}
 {% endblock %}

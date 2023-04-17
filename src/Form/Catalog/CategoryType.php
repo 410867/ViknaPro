@@ -22,8 +22,12 @@ class CategoryType extends AbstractType
         }
 
         $builder
-            ->add('template', EnumType::class, ['class' => CategoryTemplateEnum::class])
+            ->add('template', EnumType::class, [
+                'class' => CategoryTemplateEnum::class,
+                'label' => 'category_template_form_field'
+            ])
             ->add('parent', CategoryChoiceType::class, [
+                'label' => 'category_parent_field',
                 'required' => false,
                 'current_category_id' => $categoryId
             ])

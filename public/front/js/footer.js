@@ -15,18 +15,23 @@ IMask(
     }
 );
 
+document.getElementById('catalog_footer_button').onclick = () => {
+    document.getElementById('catalog_header_button').focus()
+    document.getElementById('catalog_header_button').dispatchEvent(new Event('mouseenter'))
+}
+
 function renderingSliderMobile() {
 
-    if(sliderItems.length > 5) {
+    if (sliderItems.length > 5) {
         footerSlider.innerHTML = ``;
         sliderItems.forEach((item, i) => {
-            if(i >= 5) {
+            if (i >= 5) {
                 return;
             }
             footerSlider.append(item);
         });
         settingSlickSlider();
-    } else if(sliderItems.length > 0) {
+    } else if (sliderItems.length > 0) {
         settingSlickSlider();
     }
     settingSlickSlider();
@@ -34,19 +39,19 @@ function renderingSliderMobile() {
 
 function renderingSliderDesktop() {
 
-    if(sliderItems.length > 40) {
+    if (sliderItems.length > 40) {
         footerSlider.innerHTML = ``;
         sliderItems.forEach((item, i) => {
-            if(i >= 40) {
+            if (i >= 40) {
                 return;
             }
             footerSlider.append(item);
         });
         settingSlickSlider();
-    } else if(sliderItems.length > 0) {
+    } else if (sliderItems.length > 0) {
         footerSlider.innerHTML = ``;
         sliderItems.forEach((item, i) => {
-            if(i >= 40) {
+            if (i >= 40) {
                 return;
             }
             footerSlider.append(item);
@@ -76,7 +81,7 @@ function settingSlickSlider() {
                     centerMode: true,       //Делает активный слайд центральным
                     arrows: false,
                 }
-            }, ],
+            },],
         });
     });
 }
@@ -89,7 +94,7 @@ const inputEvents = () => {
 }
 
 export function addingAndDeleteSliderElement() {
-    if(window.innerWidth > 991) {
+    if (window.innerWidth > 991) {
         divStart.classList.remove('hide');
         divEnd.classList.remove('hide');
         renderingSliderDesktop();
@@ -99,7 +104,7 @@ export function addingAndDeleteSliderElement() {
         }, 500);
     }
 
-    if(window.innerWidth <= 991) {
+    if (window.innerWidth <= 991) {
         divStart.classList.add('hide');
         divEnd.classList.add('hide');
 
@@ -119,7 +124,7 @@ footerFormButton.addEventListener('click', (event) => {
     inputNumber.classList.remove('input__empty__field');
     labelRedText.classList.add('hide');
 
-    if(inputNumber.value.length !== 17) {
+    if (inputNumber.value.length !== 17) {
         inputNumber.classList.add('input__empty__field');
         labelRedText.classList.remove('hide');
         event.preventDefault();

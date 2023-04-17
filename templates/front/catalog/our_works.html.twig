@@ -1,10 +1,32 @@
 {% extends 'front/base.html.twig' %}
 
-{% block body %}
-
-{% endblock %}
-
 {% block stylesheet %}
-
+    <link rel="stylesheet" href="/front/css/ourWork.css">
 {% endblock %}
 
+{% block body %}
+    <main>
+        <div class="main">
+            <hr class="top__main__hr">
+            <div class="block__ourWork">
+                <p><a href="/">Главная</a><span>/</span>Наши работы</p>
+                <h2>Наши работы</h2>
+                <div class="block__ourWork__list">
+                    {% for item in categoryCollection %}
+                        <div class="block__ourWork__item">
+                            <img class="ourWork__item__img" src="{{ item.img|app_img }}" alt="">
+                            <div class="block__text">
+                                <h3>{{ item.title }}</h3>
+                                <p>{{ item.description }}</p>
+                                <a href="{{ path('collection_products', {'slug': item.slug}) }}">
+                                    Смотреть коллекцию
+                                    <img src="/front/images/arrow_right_Img.svg" alt="">
+                                </a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </main>
+{% endblock %}

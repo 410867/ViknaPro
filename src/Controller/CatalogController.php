@@ -6,6 +6,7 @@ use App\Entity\Category;
 use App\Entity\CategoryCollection;
 use App\Object\Category\CategoryTemplateEnum;
 use App\Object\ProductFilter;
+use App\Repository\CategoryCollectionRepository;
 use App\Repository\ProductRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,9 +42,11 @@ final class CatalogController extends AppAbstractController
     }
 
     #[Route('/catalog/our-works', name: 'our_works', methods: ['GET'])]
-    public function ourWorks(): Response
+    public function ourWorks(CategoryCollectionRepository $repository): Response
     {
-        return $this->render('/front/catalog/our_works.html.twig');
+        $categoryCollection = $repository->findBy([], ['sort' => 'ASC'], 12);
+
+        return $this->render('/front/catalog/our_works.html.twig', ['categoryCollection' => $categoryCollection]);
     }
 
     #[Route('/catalog/collection/products/{slug}', name: 'collection_products', methods: ['GET'])]

@@ -1,7 +1,7 @@
 {% extends 'front/base.html.twig' %}
 
 {% block stylesheet %}
-    <link rel="stylesheet" href="/front/css/ourWorkCollection.css">
+    <link rel="stylesheet" href="/front/css/ourWorkCollection.css?v=3">
 {% endblock %}
 
 {% block body %}
@@ -83,7 +83,7 @@
             <div class="block__img__slider">
                 <div class="block__button__contact mobile">
                     <button class="button__contact modal__table__button__contact mobile"><img
-                                src="/front/images/ourWork_img/btn_contacts_img.svg" alt="">Связаться с нами
+                                src="/front/images/btn_contacts_img.svg" alt="">Связаться с нами
                     </button>
                 </div>
                 <hr class="line">
@@ -100,6 +100,6 @@
 {% endblock %}
 
 {% block js %}
-    <script type="module" src="{{ asset_version('/front/js/ourWorkCollection.js') }}"></script>
+    <script type="module" src="{{ asset_version('/front/js/ourWorkCollection.js?v=3') }}"></script>
     <script src="{{ asset_version('/front/js/youtubeVideo.js?v=1') }}"></script>
 {% endblock %}

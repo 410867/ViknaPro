@@ -150,6 +150,7 @@
     width: 18vw;
     height: 18vw;
     border-radius: 8px;
+    object-fit: cover;
 }
 
 .header__slide {
@@ -673,9 +674,9 @@
         width: 270px;
     }
 
-/*    .block__connection {
-        margin: 0 10px;
-    }*/
+    /*    .block__connection {
+            margin: 0 10px;
+        }*/
 
     .block__contactUs {
         width: 270px;

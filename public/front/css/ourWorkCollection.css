@@ -122,15 +122,6 @@
     gap: 10px;
 }
 
-/*.block__ourWorkCollection .block__ourWorkCollection__image__list {
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: flex-start;
-    gap: 10px;
-}*/
-
 .block__ourWorkCollection .block__ourWorkCollection__video__list {
     width: 100%;
     display: flex;
